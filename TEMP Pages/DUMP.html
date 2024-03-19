@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Welcome to Firebase Hosting</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- update the version number as needed -->
+    <script defer src="/__/firebase/10.8.1/firebase-app-compat.js"></script>
+    <!-- include only the Firebase features as you need -->
+    <script defer src="/__/firebase/10.8.1/firebase-auth-compat.js"></script>
+    <script defer src="/__/firebase/10.8.1/firebase-database-compat.js"></script>
+    <script defer src="/__/firebase/10.8.1/firebase-storage-compat.js"></script>
+    <!-- 
+      initialize the SDK after all desired features are loaded, set useEmulator to false
+      to avoid connecting the SDK to running emulators.
+    -->
+    <script defer src="/__/firebase/init.js?useEmulator=true"></script>
+    
+    <script defer src="app.js"></script>
+  </head>
+  <body>
+    <div id="login_forum">
+      <h1>Welcome Back</h1>
+      <div class="stack">
+        <label for="email_login_box" id="email_login_box_label">Email</label>
+        <input type="text" id="email_login_box" placeholder="Email">
+      </div>
+      <div class="stack">
+        <label for="password_login_box" id="password_login_box_label">Password</label>
+        <input type="password" id="password_login_box" placeholder="Password">
+      </div>
+      <button onclick="registerEP()" id="email_login_button">Login</button>
+      <link href="forgotpassword.html">forgot your password?</link>
+      <p>or</p>
+      <button onclick="googleLogin()" id="google_login_button">
+        Login with Google
+      </button>
+    </div>
+  </body>
+</html>
+
+<script>
+
+firebase.auth().onAuthStateChanged(user => {
+    if (user) {
+        document.getElementById('username').innerText = `Hello, ${user.displayName}`;
+
+        const userRef = firebase.database().ref('users').child(user.uid);
+
+        userRef.once('value')
+            .then(snapshot => {
+                const userData = snapshot.val();
+                console.log(userData);
+            })
+            .catch(error => {
+                console.error("Error fetching user data:", error);
+            });
+    } else {
+        window.location.href = 'login.html';
+    }
+});
+
+console.log(user.displayName)
+
+</script>
+
+<script>
+
+function googleLogin() {
+    const provider = new firebase.auth.GoogleAuthProvider();
+
+    firebase.auth().signInWithPopup(provider)
+        .then(result => {
+            const user = result.user;
+            window.location.href = 'TEMP_dashboard.html'
+
+            handleUser()
+        })
+        .catch(console.log);
+}
+
+</script>

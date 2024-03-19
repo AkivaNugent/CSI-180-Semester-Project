@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TEMP diary page</title>
+    <!-- update the version number as needed -->
+    <script defer src="/__/firebase/10.8.1/firebase-app-compat.js"></script>
+    <!-- include only the Firebase features as you need -->
+    <script defer src="/__/firebase/10.8.1/firebase-auth-compat.js"></script>
+    <script defer src="/__/firebase/10.8.1/firebase-database-compat.js"></script>
+    <script defer src="/__/firebase/10.8.1/firebase-storage-compat.js"></script>
+    <!-- 
+      initialize the SDK after all desired features are loaded, set useEmulator to false
+      to avoid connecting the SDK to running emulators.
+    -->
+    <script defer src="/__/firebase/init.js?useEmulator=true"></script>
+    
+    <script defer src="app.js"></script>
+    <link rel="stylesheet" href="TEMP_diary_style.CSS">
+</head>
+<body id="page">
+    <!-- SIDEBAR -->
+    <div id="sidebar_small">
+        <p class="white">/ / /</p>
+    </div>
+    <div id="dash_page_structure">
+        <!-- HEADER --> 
+        <header id="header_bar">
+                <h1 id="account_btn">this is the acc_button</h1>
+        </header>
+        <!-- Main Content -->
+        <div id="main_content">
+            <!-- DIARY AND PERCENTAGES -->
+            <!-- DIARY -->
+            <div id="main_logging">
+                <div id="daily_food_listing">
+                    <div id="food_list_header">
+                        <div id="flh_food">food</div>s
+                        <div id="flh_exercise">exercise</div>
+                        <div id="flh_biometric">biometric</div>
+                        <div id="flh_note">note</div>
+                    </div>
+                    <div id="food_list_body">
+                        <table id="food_list_table">
+                            <tr class="food_entry">
+                                <th class="food_filler"></th>
+                                <th class="food_icon">F</th>
+                                <th class="food_name">name of the food goes here , but after a certain point, we should probably just cut off the name</th>
+                                <th class="food_quantity">#</th>
+                                <th class="food_unit">Serving size/unit</th>
+                                <th class="food_calories">calc for calories</th>
+                                <th class="food_kCal">kCal</th>
+                            </tr>
+                            <tr class="food_entry">
+                                <th class="food_filler"></th>
+                                <th class="food_icon">F</th>
+                                <th class="food_name">name of the food goes here</th>
+                                <th class="food_quantity">#</th>
+                                <th class="food_unit">Serving size/unit</th>
+                                <th class="food_calories">calc for calories</th>
+                                <th class="food_kCal">kCal</th>
+                            </tr>
+                            <tr class="food_entry">
+                                <th class="food_filler"></th>
+                                <th class="food_icon">F</th>
+                                <th class="food_name">name of the food goes here</th>
+                                <th class="food_quantity">#</th>
+                                <th class="food_unit">Serving size/unit</th>
+                                <th class="food_calories">calc for calories</th>
+                                <th class="food_kCal">kCal</th>
+                            </tr>
+                            <tr class="food_entry">
+                                <th class="food_filler"></th>
+                                <th class="food_icon">F</th>
+                                <th class="food_name">name of the food goes here</th>
+                                <th class="food_quantity">#</th>
+                                <th class="food_unit">Serving size/unit</th>
+                                <th class="food_calories">calc for calories</th>
+                                <th class="food_kCal">kCal</th>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <!-- PERCENTAGES -->
+                <div id="daily_totals">
+                    <div id="energy_bars">ENERGY BARS </div>
+                    <div id="seperator"></div>
+                    <div id="macro_bars">MACRO BARS </div>
+                </div>
+            </div>
+            <!-- CALENDAR -->
+            <div id="calendar_section">
+                <div id="calendar_remote">
+                    <div id="month_back"><<</div>
+                    <div id="day_back"><</div>
+                    <div id="date">Mar 16</div>
+                    <div id="day_forward">></div>
+                    <div id="month_forward">>></div>
+                </div>
+                <div id="calendar_grid">
+                    <div id="month">March</div>
+                    <table id="days">
+                        <tr>
+                            <th>S</th>
+                            <th>M</th>
+                            <th>T</th>
+                            <th>W</th>
+                            <th>Th</th>
+                            <th>F</th>
+                            <th>S</th>
+                        </tr>
+                        <tr>
+                            <th class="day">1</th>
+                            <th class="day">2</th>
+                            <th class="day">3</th>
+                            <th class="day">4</th>
+                            <th class="day">5</th>
+                            <th class="day">6</th>
+                            <th class="day">7</th>
+                        </tr>
+                        <tr>
+                            <th class="day">8</th>
+                            <th class="day">9</th>
+                            <th class="day">10</th>
+                            <th class="day">11</th>
+                            <th class="day">12</th>
+                            <th class="day">13</th>
+                            <th class="day">14</th>
+                        </tr>
+                        <tr>
+                            <th class="day">15</th>
+                            <th class="day">16</th>
+                            <th class="day">17</th>
+                            <th class="day">18</th>
+                            <th class="day">19</th>
+                            <th class="day">20</th>
+                            <th class="day">21</th>
+                            
+                        </tr>
+                        <tr>
+                            <th class="day">22</th>
+                            <th class="day">23</th>
+                            <th class="day">24</th>
+                            <th class="day">25</th>
+                            <th class="day">26</th>
+                            <th class="day">27</th>
+                            <th class="day">28</th>
+                        </tr>
+                        <tr>
+                            <th class="day">29</th>
+                            <th class="day">30</th>
+                            <th class="day">31</th>
+                        </tr>
+                    </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,34 @@
+#login_forum {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 500px;
+    border: 2px solid;
+    border-radius: 25px;
+    max-width: 400px;
+}
+
+#email_login_box_label{
+    
+    margin-right: 23px;
+}
+#email_login_box{
+    width: 192px;
+}
+#password_login_box{
+    width: 192px
+}
+#email_login_button{
+    margin-top: 10px;
+    width: 100px;
+    height: 30px;
+}
+#google_login_button{
+    margin-top: 10px;
+    width: 100px;
+}
+.stack{
+    display: flex;
+    flex-direction: column; 
+}
