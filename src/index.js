@@ -15,6 +15,7 @@ import {
   onSnapshot,
   addDoc,
   deleteDoc,
+  updateDoc,
   doc,
   query,
   where,
@@ -22,11 +23,15 @@ import {
   serverTimestamp
   } from 'firebase/firestore';
 
-  /*
 import { 
-  getAuth
+  getAuth,
+  createUserWithEmailAndPassword,
+  signOut,
+  signInWithEmailAndPassword,
+  onAuthStateChanged,
+  GoogleAuthProvider,
+  signInWithPopup
   } from 'firebase/auth';
-*/
 
 
 const firebaseConfig = {
@@ -39,30 +44,32 @@ const firebaseConfig = {
 };
 
 // init firebase app
-initializeApp(firebaseConfig)
+initializeApp(firebaseConfig);
 
 // -----------------------------------------------------------------------------
 
 
 
 // init services ---------------------------------------------------------------
-const db = getFirestore()
+const db = getFirestore();
+const auth = getAuth();
+const provider = new GoogleAuthProvider()
 
 // collection ref
-const colRef = collection(db, 'biometrics')
+const colRef = collection(db, 'biometrics');
 
 //queries
 const startDate = new Date('2024-03-01');
 const endDate = new Date('2024-03-20');
 const q = query(colRef,
-  where('datetime', '>=', startDate ),
-  where('datetime', '<', endDate ),
+  //where('datetime', '>=', startDate ),
+  //where('datetime', '<', endDate ),
   orderBy('datetime', 'desc')
   );
 
 
 // real time collection data
-onSnapshot(q, (snapshot) => {
+const unsubCol = onSnapshot(q, (snapshot) => {
   let biometrics = []
   snapshot.docs.forEach((doc) => {
     biometrics.push({ ...doc.data(), id: doc.id })
@@ -87,7 +94,7 @@ addBiometric.addEventListener('submit', (e) => {
   })
 })
 
-  // deleting entry
+// deleting entry
 const deleteBiometric = document.querySelector('.delete')
 deleteBiometric.addEventListener('submit', (e) => {
   e.preventDefault()
@@ -99,5 +106,97 @@ deleteBiometric.addEventListener('submit', (e) => {
       deleteBiometric.reset()
     })
 
+})
+
+// updating entry
+const updateBiometric = document.querySelector('.update')
+updateBiometric.addEventListener('submit', (e) => {
+  e.preventDefault()
+
+  const docRef = doc(db, 'biometrics', updateBiometric.id.value)
+
+  updateDoc(docRef, {
+    height: '001'
+  })
+  .then(() => {
+    updateBiometric.reset()
+  })
+})
+
+// signing up user
+const signupForm = document.querySelector('.signup')
+signupForm.addEventListener('submit', (e) => {
+  e.preventDefault()
+  //console.log('OBAMNA')
+
+  const email = signupForm.email.value
+  const password = signupForm.password.value
+
+  createUserWithEmailAndPassword(auth, email, password)
+    .then((cred) => {
+      console.log('User Created:', cred.user)
+      signupForm.reset();
+    })
+    .catch((err) => {
+      console.log(err.message)
+    })
+})
+
+//login user
+const loginForm = document.querySelector('.login')
+loginForm.addEventListener('submit', (e) => {
+  e.preventDefault()
+
+  const email = loginForm.email.value
+  const password = loginForm.password.value
+
+  signInWithEmailAndPassword(auth, email, password)
+    .then((cred) => {
+      //console.log('the user is logged in: ', cred.user)
+    })
+    .catch((err) => {
+      console.log(err.message)
+    })
+})
+
+//logout user
+const logoutForm = document.querySelector('.logout')
+logoutForm.addEventListener('click', () => {
+  signOut(auth)
+  .then(() => {
+    //console.log('the user is signed out')
+  })
+  .catch((err) => {
+    console.log(err.message)
+  })
+})
+
+//on auth state change
+const unsubAuth = onAuthStateChanged(auth, (user) => {
+  console.log('User status: ', user)
+})
+
+// Google Auth
+const loginWithGoogle = document.querySelector('.googleLogin')
+loginWithGoogle.addEventListener('click', () => {
+  signInWithPopup(auth, provider)
+  .then((result) =>{
+    const cred = GoogleAuthProvider.credentialFromResult(result)
+    const token = cred.accessToken
+    const user = result.user
+    //console.log(user)
+  })
+  .catch((err) => {
+    console.log(err.message)
+  })
+})
+
+// Unsubscribe from changes (auth and db)
+const unsubButton = document.querySelector('.unsub')
+unsubButton.addEventListener('click', () => {
+  console.log('Unsubscribing')
+  unsubCol()
+  unsubAuth()
+  console.log('Unsubscribed')
 })
 

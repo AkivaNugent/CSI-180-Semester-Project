@@ -6,7 +6,6 @@
   <title>Nutrition Tracking App</title>
 </head>
 <body>
-  <h1>getting DB figured out</h1>
 
 <!--Login Stuff---------------------------------------------------------------->
 <!--
@@ -30,6 +29,8 @@
 -->
 <!----------------------------------------------------------------------------->
 
+<!--ADD, DELETE, UPDATE FILES-->
+<h1>DB STUFF</h1>
 <form class="add">
   <label for="Height">Height:</label>
   <input type="text" name="height" required>
@@ -43,11 +44,45 @@
   <label for="id">Document id:</label>
   <input type="text" name="id" required>
 
-  <button>delete a book</button>
+  <button>delete a biometric</button>
+</form>
+<form class="update">
+  <label for="id">Document id:</label>
+  <input type="text" name="id" required>
+
+  <button>update a height</button>
 </form>
 
+<!-- SIGNUP AND LOGIN/OUT WITH EMAIL AND PASSWORD-->
+<br><br><br><br>
+<h1>SIGNUP AND LOGIN/OUT STUFF</h1>
+  <form class="signup">
+    <label for="email">Email</label>
+    <input type="email" name="email" placeholder="Email">
 
+    <label for="password">Password</label>
+    <input type="password" name="password" placeholder="Password">
+    <button>Sign Up</button>
+  </form>
+  <br>
+  <form class="login">
+    <label for="email">Email</label>
+    <input type="email" name="email" placeholder="Email">
 
+    <label for="password">Password</label>
+    <input type="password" name="password" placeholder="Password">
+    <button>Log In</button>
+  </form>
+  <br>
+    <button class="logout">Log Out</button>
+
+    <br><br><br>
+    <p1>or</p1>
+    <br><br><br>
+    <button class="googleLogin">Login with Google</button>
+    <br><br><br>
+    <br><br><br>
+    <button class="unsub">unsub from stuff</button>
 
   <script defer src="bundle.js"></script>
 </body>
