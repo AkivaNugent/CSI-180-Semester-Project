@@ -55,6 +55,7 @@ const provider = new GoogleAuthProvider()
 // -----------------------------------------------------------------------------
 // collection ref
 const colRef = collection(db, 'biometrics');
+const foodCol = collection(db, 'Foods');
 
 //queries
 const startDate = new Date('2024-03-01');
@@ -209,3 +210,22 @@ unsubButton.addEventListener('click', () => {
 export function redirectToDash() {
   window.location.href = 'pages/dashboard.html'
 }
+
+ // adding entry
+ const addFood = document.querySelector('foodform')
+ if(addFood){
+   addFood.addEventListener('submit', (e) => {
+     e.preventDefault()
+     addDoc(foodCol, {
+       name: foodform.name.value,
+       fid: foodform.fid.value,
+       serving_size: foodform.serving_size.value,
+       calories: foodform.calories.value,
+       protein: foodform.protien.value,
+       carbs: foodform.carbs.value,
+       fats: foodform.fats.value,
+     })
+     .then(() =>{
+       addFood.reset()  
+     })
+   })}

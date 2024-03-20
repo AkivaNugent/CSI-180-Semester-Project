@@ -1,24 +1,27 @@
+body{
+    margin: 0;
+}
 /* HEADER */
-#header_bar{
+.header_bar{
     display: flex;
     justify-content: right;
     align-items: center;
     padding: 10px 20px;
     border-bottom: solid;
 }
-#account_button{
+.account_button{
     margin: 0;
     display: inline-block;
 }
 
 /* CONTENT */
-    #page{
+    .page{
         display: flex;
         flex-direction: row;
         margin: 0;
         padding: 0;
     }
-    #dash_page_structure{
+    .dash_page_structure{
         display: flex;
         flex-direction: column;
         flex-grow: 1;
@@ -26,19 +29,19 @@
         padding: 0;
         margin: 0;
     }
-        #main_content{
+        .main_content{
             display: flex;
             flex-direction: row;
             margin: auto;
             margin: 10px;
         }
-        #main_logging{
+        .main_logging{
             flex-grow: 1;
         }
 
 
 /* SIDE BAR */
-#sidebar_small{
+.sidebar_small{
     width: 100px;
     border-radius: 10px;
     border-top: solid;
@@ -46,151 +49,184 @@
     min-width: 100px;
     background-color: rgb(45, 45, 94);
 }
-#sidebar_big{
+.sidebar_big{
     width: 100px;
 }
 
 
 /* CALENDAR */
-    #calendar_section{
+.calendar_section{
+    border: solid;
+    min-width: 400px;
+    max-width: 400px;
+    margin: 10px;
+}
+    .calendar_remote{
         border: solid;
-        min-width: 400px;
-        max-width: 400px;
+        margin: 10px;
+        display: flex;
+        flex-direction: row;
+        text-align: center;
+        height: 50px;
+    }
+    .month{
+        text-align: center;
+    }
+    .calendar_grid{
+        border: solid;
+        margin: 10px;
+        
+    }
+    .days{
+        border: solid;
+        margin: 10px;
+        width:350px;
+        height:350px;
+    }
+    .day{
+        border: solid;
         margin: 10px;
     }
-        #calendar_remote{
-            border: solid;
-            margin: 10px;
-            display: flex;
-            flex-direction: row;
-            text-align: center;
-            height: 50px;
-        }
-        #month{
-            text-align: center;
-        }
-        #calendar_grid{
-            border: solid;
-            margin: 10px;
-            
-        }
-        #days{
-            border: solid;
-            margin: 10px;
-            width:350px;
-            height:350px;
-        }
-        .day{
-            border: solid;
-            margin: 10px;
-        }
-        #month_back{
-            flex-grow: 1;
-        }
-        #day_back{
-            flex-grow: 1;
-        }
-        #date{
-            flex-grow: 3;
-        }
-        #day_forward{
-            flex-grow: 1;
-        }
-        #month_forward{
-            flex-grow: 1;
-        }
+    .month_back{
+        flex-grow: 1;
+    }
+    .day_back{
+        flex-grow: 1;
+    }
+    .date{
+        flex-grow: 3;
+    }
+    .day_forward{
+        flex-grow: 1;
+    }
+    .month_forward{
+        flex-grow: 1;
+    }
 
 
 /* DIARY */
-    #daily_food_listing{
+.daily_food_listing{
+margin: 10px;
+}
+/*HEADER*/
+.food_list_header{
+    border: 2px, solid;
+    margin: .5%;
+    width: 99%;
+    height: 75px;
+    border: solid;
+    display: flex;
+    flex-direction: row;
+}
+    .flh_food{
+        height: 50px;
         margin: 10px;
-    }
-    #food_list_header{
-        border: 2px, solid;
-        margin: .5%;
-        width: 99%;
-        height: 5dvh;
         border: solid;
-        display: flex;
-        flex-direction: row;
+        border-radius: 10px;
+        overflow: hidden;
     }
-        #flh_food{
-            border: solid;
-            margin: 10px;
-        }
-        #flh_exercise{
-            border: solid;
-            margin: 10px;
-        }
-        #flh_biometric{
-            border: solid;
-            margin: 10px;
-        }
-        #flh_note{
-            border: solid;
-            margin: 10px;
-        }
-    #food_list_body{
-        border: 2px, solid;
-        margin: .5%;
-        width: 99%;
-        min-height: 200px;
+    .flh_food_image{
+        display: block;
+        width: 50px;
+        height: 50px;
+    }
+    .flh_exercise{
+        height: 50px;
+        margin: 10px;
         border: solid;
-        border-radius: 15px;
+        border-radius: 10px;
+        overflow: hidden;
     }
-    #food_list_table{
-        margin: 0;
-        width: 100%;
+    .flh_exercise_image{
+        display: block;
+        width: 50px;
+        height: 50px;
     }
-    .food_entry{
-        height: 30px;
+    .flh_biometric{
+        height: 50px;
+        margin: 10px;
+        border: solid;
+        border-radius: 10px;
+        overflow: hidden;
     }
-    .food_filler{
-        width: 5%;
+    .flh_biometric_image{
+        display: block;
+        width: 50px;
+        height: 50px;
     }
-    .food_icon{
-        width: 3%;
+    .flh_note{
+        height: 50px;
+        margin: 10px;
+        border: solid;
+        border-radius: 10px;
+        overflow: hidden;
     }
-    .food_name{
-        width: 70%;
-        text-align: left;
+    .flh_note_image{
+        display: block;
+        width: 50px;
+        height: 50px;
     }
-    .food_quantity{
-        width: 1%;
-    }
-    .food_unit{
-        width: 10%;
-        text-align: left;
-    }
-    .food_calories{
-        width: 5%;
-        text-align: right;
-    }
-    .food_kCal{
-        width: 3%;
-    }
+.food_list_body{
+    border: 2px, solid;
+    margin: .5%;
+    width: 99%;
+    min-height: 200px;
+    border: solid;
+    border-radius: 15px;
+}
+.food_list_table{
+    margin: 0;
+    width: 100%;
+}
+.food_entry{
+    height: 30px;
+}
+.food_filler{
+    width: 5%;
+}
+.food_icon{
+    width: 3%;
+}
+.food_name{
+    width: 70%;
+    text-align: left;
+}
+.food_quantity{
+    width: 1%;
+}
+.food_unit{
+    width: 10%;
+    text-align: left;
+}
+.food_calories{
+    width: 5%;
+    text-align: right;
+}
+.food_kCal{
+    width: 3%;
+}
 
 /* NUTRITION */
-    #daily_totals{
-        border: solid;
+.daily_totals{
+    border: solid;
+    display: flex;
+    margin: 10px;
+    height: 300px;
+}
+    .energy_bars{
         display: flex;
-        margin: 10px;
-        height: 300px;
+        margin: 30px;
+        flex-grow: 1;
     }
-        #energy_bars{
-            display: flex;
-            margin: 30px;
-            flex-grow: 1;
-        }
-        #seperator{
-            border: solid;
-            border-color: rgb(158, 158, 158);
-            border-radius: 100px;
-            border-width: 2px;
-            margin: 30px;
-        }
-        #macro_bars{
-            display: flex;
-            margin: 30px;
-            flex-grow: 1;
-        }
+    .seperator{
+        border: solid;
+        border-color: rgb(158, 158, 158);
+        border-radius: 100px;
+        border-width: 2px;
+        margin: 30px;
+    }
+    .macro_bars{
+        display: flex;
+        margin: 30px;
+        flex-grow: 1;
+    }
