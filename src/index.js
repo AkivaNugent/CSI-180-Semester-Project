@@ -46,15 +46,13 @@ const firebaseConfig = {
 // init firebase app
 initializeApp(firebaseConfig);
 
-// -----------------------------------------------------------------------------
-
-
-
-// init services ---------------------------------------------------------------
+// init services
 const db = getFirestore();
 const auth = getAuth();
 const provider = new GoogleAuthProvider()
 
+
+// -----------------------------------------------------------------------------
 // collection ref
 const colRef = collection(db, 'biometrics');
 
@@ -66,6 +64,7 @@ const q = query(colRef,
   //where('datetime', '<', endDate ),
   orderBy('datetime', 'desc')
   );
+
 
 
 // real time collection data
@@ -80,22 +79,24 @@ const unsubCol = onSnapshot(q, (snapshot) => {
 
   // adding entry
 const addBiometric = document.querySelector('.add')
-addBiometric.addEventListener('submit', (e) => {
-  e.preventDefault()
-  const currentTime = serverTimestamp()
-  addDoc(colRef, {
-    height: addBiometric.height.value,
-    weight: addBiometric.weight.value,
-    datetime: currentTime
-  })
-  .then(() =>{
-    //console.log(currentTime)
-    addBiometric.reset()  
-  })
-})
+if(addBiometric){
+  addBiometric.addEventListener('submit', (e) => {
+    e.preventDefault()
+    const currentTime = serverTimestamp()
+    addDoc(colRef, {
+      height: addBiometric.height.value,
+      weight: addBiometric.weight.value,
+      datetime: currentTime
+    })
+    .then(() =>{
+      //console.log(currentTime)
+      addBiometric.reset()  
+    })
+  })}
 
 // deleting entry
 const deleteBiometric = document.querySelector('.delete')
+if(deleteBiometric){
 deleteBiometric.addEventListener('submit', (e) => {
   e.preventDefault()
 
@@ -106,10 +107,11 @@ deleteBiometric.addEventListener('submit', (e) => {
       deleteBiometric.reset()
     })
 
-})
+})}
 
 // updating entry
 const updateBiometric = document.querySelector('.update')
+if(updateBiometric){
 updateBiometric.addEventListener('submit', (e) => {
   e.preventDefault()
 
@@ -121,10 +123,11 @@ updateBiometric.addEventListener('submit', (e) => {
   .then(() => {
     updateBiometric.reset()
   })
-})
+})}
 
 // signing up user
 const signupForm = document.querySelector('.signup')
+if(signupForm){
 signupForm.addEventListener('submit', (e) => {
   e.preventDefault()
   //console.log('OBAMNA')
@@ -140,10 +143,11 @@ signupForm.addEventListener('submit', (e) => {
     .catch((err) => {
       console.log(err.message)
     })
-})
+})}
 
 //login user
 const loginForm = document.querySelector('.login')
+if(loginForm){
 loginForm.addEventListener('submit', (e) => {
   e.preventDefault()
 
@@ -153,14 +157,16 @@ loginForm.addEventListener('submit', (e) => {
   signInWithEmailAndPassword(auth, email, password)
     .then((cred) => {
       //console.log('the user is logged in: ', cred.user)
+      window.location.href = 'pages/TEMP_dashboard.html'
     })
     .catch((err) => {
       console.log(err.message)
     })
-})
+})}
 
 //logout user
 const logoutForm = document.querySelector('.logout')
+if(logoutForm){
 logoutForm.addEventListener('click', () => {
   signOut(auth)
   .then(() => {
@@ -169,7 +175,7 @@ logoutForm.addEventListener('click', () => {
   .catch((err) => {
     console.log(err.message)
   })
-})
+})}
 
 //on auth state change
 const unsubAuth = onAuthStateChanged(auth, (user) => {
@@ -178,25 +184,28 @@ const unsubAuth = onAuthStateChanged(auth, (user) => {
 
 // Google Auth
 const loginWithGoogle = document.querySelector('.googleLogin')
+if(loginWithGoogle){
 loginWithGoogle.addEventListener('click', () => {
   signInWithPopup(auth, provider)
-  .then((result) =>{
-    const cred = GoogleAuthProvider.credentialFromResult(result)
-    const token = cred.accessToken
-    const user = result.user
-    //console.log(user)
+  .then(() =>{
+    redirectToDash()
   })
   .catch((err) => {
     console.log(err.message)
   })
-})
+})}
 
 // Unsubscribe from changes (auth and db)
 const unsubButton = document.querySelector('.unsub')
+if(unsubButton){
 unsubButton.addEventListener('click', () => {
   console.log('Unsubscribing')
   unsubCol()
   unsubAuth()
   console.log('Unsubscribed')
-})
+})}
 
+// redirect to dashboard
+export function redirectToDash() {
+  window.location.href = 'pages/dashboard.html'
+}

@@ -1,0 +1,26 @@
+.everything{
+    display: flex;
+    flex-direction: row
+;
+}
+.column1{
+    display: inline-block;
+    border: solid;
+    border-radius: 25px;
+    margin: 50px;
+    padding: 30px;
+}
+.image_container{
+    margin: 100px;
+    max-width: 500px;
+    max-height: 500px;
+    border: solid;
+    border-color: red;
+    border-radius: 25px;
+    overflow: hidden;
+}
+.me{
+    display: block;
+    width: 100%;
+    height: auto;
+}

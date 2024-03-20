@@ -4,22 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TEMP diary page</title>
-    <!-- update the version number as needed -->
-    <script defer src="/__/firebase/10.8.1/firebase-app-compat.js"></script>
-    <!-- include only the Firebase features as you need -->
-    <script defer src="/__/firebase/10.8.1/firebase-auth-compat.js"></script>
-    <script defer src="/__/firebase/10.8.1/firebase-database-compat.js"></script>
-    <script defer src="/__/firebase/10.8.1/firebase-storage-compat.js"></script>
-    <!-- 
-      initialize the SDK after all desired features are loaded, set useEmulator to false
-      to avoid connecting the SDK to running emulators.
-    -->
-    <script defer src="/__/firebase/init.js?useEmulator=true"></script>
-    
-    <script defer src="app.js"></script>
-    <link rel="stylesheet" href="TEMP_diary_style.CSS">
+    <link rel="stylesheet" href="../styles/dashboard.CSS">
 </head>
 <body id="page">
+    
+    <button class="test">TEST BUTTON</button>
     <!-- SIDEBAR -->
     <div id="sidebar_small">
         <p class="white">/ / /</p>
@@ -27,7 +16,7 @@
     <div id="dash_page_structure">
         <!-- HEADER --> 
         <header id="header_bar">
-                <h1 id="account_btn">this is the acc_button</h1>
+                <h1 id="account_btn"></h1>
         </header>
         <!-- Main Content -->
         <div id="main_content">
@@ -159,5 +148,11 @@
             </div>
         </div>
     </div>
+    
+
+
+
+
+  <script defer src="../bundle.js"></script>
 </body>
 </html>
