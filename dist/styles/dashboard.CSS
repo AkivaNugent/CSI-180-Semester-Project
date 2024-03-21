@@ -1,24 +1,24 @@
 /* HEADER */
-#header_bar{
+.header_bar{
     display: flex;
     justify-content: right;
     align-items: center;
     padding: 10px 20px;
     border-bottom: solid;
 }
-#account_button{
+.account_button{
     margin: 0;
     display: inline-block;
 }
 
 /* CONTENT */
-    #page{
+    .page{
         display: flex;
         flex-direction: row;
         margin: 0;
         padding: 0;
     }
-    #dash_page_structure{
+    .dash_page_structure{
         display: flex;
         flex-direction: column;
         flex-grow: 1;
@@ -26,19 +26,19 @@
         padding: 0;
         margin: 0;
     }
-        #main_content{
+        .main_content{
             display: flex;
             flex-direction: row;
             margin: auto;
             margin: 10px;
         }
-        #main_logging{
+        .main_logging{
             flex-grow: 1;
         }
 
 
 /* SIDE BAR */
-#sidebar_small{
+.sidebar_small{
     width: 100px;
     border-radius: 10px;
     border-top: solid;
@@ -46,19 +46,19 @@
     min-width: 100px;
     background-color: rgb(45, 45, 94);
 }
-#sidebar_big{
+.sidebar_big{
     width: 100px;
 }
 
 
 /* CALENDAR */
-    #calendar_section{
+    .calendar_section{
         border: solid;
         min-width: 400px;
         max-width: 400px;
         margin: 10px;
     }
-        #calendar_remote{
+        .calendar_remote{
             border: solid;
             margin: 10px;
             display: flex;
@@ -66,15 +66,15 @@
             text-align: center;
             height: 50px;
         }
-        #month{
+        .month{
             text-align: center;
         }
-        #calendar_grid{
+        .calendar_grid{
             border: solid;
             margin: 10px;
             
         }
-        #days{
+        .days{
             border: solid;
             margin: 10px;
             width:350px;
@@ -84,28 +84,28 @@
             border: solid;
             margin: 10px;
         }
-        #month_back{
+        .month_back{
             flex-grow: 1;
         }
-        #day_back{
+        .day_back{
             flex-grow: 1;
         }
-        #date{
+        .date{
             flex-grow: 3;
         }
-        #day_forward{
+        .day_forward{
             flex-grow: 1;
         }
-        #month_forward{
+        .month_forward{
             flex-grow: 1;
         }
 
 
 /* DIARY */
-    #daily_food_listing{
+    .daily_food_listing{
         margin: 10px;
     }
-    #food_list_header{
+    .food_list_header{
         border: 2px, solid;
         margin: .5%;
         width: 99%;
@@ -114,23 +114,23 @@
         display: flex;
         flex-direction: row;
     }
-        #flh_food{
+        .flh_food{
             border: solid;
             margin: 10px;
         }
-        #flh_exercise{
+        .flh_exercise{
             border: solid;
             margin: 10px;
         }
-        #flh_biometric{
+        .flh_biometric{
             border: solid;
             margin: 10px;
         }
-        #flh_note{
+        .flh_note{
             border: solid;
             margin: 10px;
         }
-    #food_list_body{
+    .food_list_body{
         border: 2px, solid;
         margin: .5%;
         width: 99%;
@@ -138,7 +138,7 @@
         border: solid;
         border-radius: 15px;
     }
-    #food_list_table{
+    .food_list_table{
         margin: 0;
         width: 100%;
     }
@@ -171,25 +171,25 @@
     }
 
 /* NUTRITION */
-    #daily_totals{
+    .daily_totals{
         border: solid;
         display: flex;
         margin: 10px;
         height: 300px;
     }
-        #energy_bars{
+        .energy_bars{
             display: flex;
             margin: 30px;
             flex-grow: 1;
         }
-        #seperator{
+        .seperator{
             border: solid;
             border-color: rgb(158, 158, 158);
             border-radius: 100px;
             border-width: 2px;
             margin: 30px;
         }
-        #macro_bars{
+        .macro_bars{
             display: flex;
             margin: 30px;
             flex-grow: 1;

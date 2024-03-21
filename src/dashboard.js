@@ -54,10 +54,22 @@ document.addEventListener('DOMContentLoaded', () => {
     if (window.location.pathname === '/dist/pages/dashboard.html') {
         auth.onAuthStateChanged((user) => {
             if (user) {
-                const headElement = document.querySelector('#account_btn')
+                const headElement = document.querySelector('.account_btn')
                 headElement.innerHTML = user.displayName
             } 
         });
     }
 });
 
+const addFoodButton = document.querySelector('.add_food_button')
+addFoodButton.addEventListener('click', () => {
+  <tr class="food_entry">
+    <th class="food_filler"></th>
+    <th class="food_icon"></th>
+    <th class="food_name"></th>
+    <th class="food_quantity"></th>
+    <th class="food_unit"></th>
+    <th class="food_calories"></th>
+    <th class="food_kCal"></th>
+</tr>
+})
