@@ -6,153 +6,168 @@
     <title>TEMP diary page</title>
     <link rel="stylesheet" href="../styles/dashboard.CSS">
 </head>
-<body id="page">
-    
-    <button class="test">TEST BUTTON</button>
-    <!-- SIDEBAR -->
-    <div id="sidebar_small">
-        <p class="white">/ / /</p>
-    </div>
-    <div id="dash_page_structure">
-        <!-- HEADER --> 
-        <header id="header_bar">
-                <h1 id="account_btn"></h1>
-        </header>
-        <!-- Main Content -->
-        <div id="main_content">
-            <!-- DIARY AND PERCENTAGES -->
-            <!-- DIARY -->
-            <div id="main_logging">
-                <div id="daily_food_listing">
-                    <div id="food_list_header">
-                        <div id="flh_food">food</div>s
-                        <div id="flh_exercise">exercise</div>
-                        <div id="flh_biometric">biometric</div>
-                        <div id="flh_note">note</div>
+<body>
+    <form class="foodform">
+        <input type="text" name="name" placeholder="name">
+        <input type="text" name="fid" placeholder="fid">
+        <input type="text" name="serving_size" placeholder="serving size">
+        <input type="text" name="calories" placeholder="calories">
+        <input type="text" name="protien" placeholder="protien">
+        <input type="text" name="carbs" placeholder="carbs">
+        <input type="text" name="fats" placeholder="fats">
+        <button>Submit Food</button>
+    </form>
+    <br><br><br><br><br><br>
+    <div class="page">
+        <!-- <button class="test">TEST BUTTON</button> -->
+        <!-- SIDEBAR -->
+        <div class="sidebar_small">
+            <p class="white">/ / /</p>
+        </div>
+        <div class="dash_page_structure">
+            <!-- HEADER --> 
+            <header class="header_bar">
+                    <h1 class="account_btn"></h1>
+            </header>
+            <!-- Main Content -->
+            <div class="main_content">
+                <!-- DIARY AND PERCENTAGES -->
+                <!-- DIARY -->
+                <div class="main_logging">
+                    <div class="daily_food_listing">
+                        <div class="food_list_header">
+                            <div class="flh_food">
+                                <img class="flh_food_image" src="https://pbs.twimg.com/media/GJJTUpCWMAIjNgY?format=png&name=small" alt="food">
+                            </div>
+                            <div class="flh_exercise">
+                                <img class="flh_exercise_image" src="https://pbs.twimg.com/media/GJJTc-7WsAA-qT0?format=png&name=medium" alt="exercise">
+                            </div>
+                            <div class="flh_biometric">
+                                <img class="flh_biometric_image" src="https://pbs.twimg.com/media/GJJTpkhXgAE74xl?format=png&name=small" alt="biometric">
+                            </div>
+                            <div class="flh_note">
+                                <img class="flh_note_image" src="https://pbs.twimg.com/media/GJJT2I1XgAAJbKf?format=png&name=small" alt="notes">
+                            </div>
+                        </div>
+                        <div class="food_list_body">
+                            <table class="food_list_table">
+                                <tr class="food_entry">
+                                    <th class="food_filler"></th>
+                                    <th class="food_icon">F</th>
+                                    <th class="food_name">name of the food goes here , but after a certain point, we should probably just cut off the name</th>
+                                    <th class="food_quantity">#</th>
+                                    <th class="food_unit">Serving size/unit</th>
+                                    <th class="food_calories">calc for calories</th>
+                                    <th class="food_kCal">kCal</th>
+                                </tr>
+                                <tr class="food_entry">
+                                    <th class="food_filler"></th>
+                                    <th class="food_icon">F</th>
+                                    <th class="food_name">name of the food goes here</th>
+                                    <th class="food_quantity">#</th>
+                                    <th class="food_unit">Serving size/unit</th>
+                                    <th class="food_calories">calc for calories</th>
+                                    <th class="food_kCal">kCal</th>
+                                </tr>
+                                <tr class="food_entry">
+                                    <th class="food_filler"></th>
+                                    <th class="food_icon">F</th>
+                                    <th class="food_name">name of the food goes here</th>
+                                    <th class="food_quantity">#</th>
+                                    <th class="food_unit">Serving size/unit</th>
+                                    <th class="food_calories">calc for calories</th>
+                                    <th class="food_kCal">kCal</th>
+                                </tr>
+                                <tr class="food_entry">
+                                    <th class="food_filler"></th>
+                                    <th class="food_icon">F</th>
+                                    <th class="food_name">name of the food goes here</th>
+                                    <th class="food_quantity">#</th>
+                                    <th class="food_unit">Serving size/unit</th>
+                                    <th class="food_calories">calc for calories</th>
+                                    <th class="food_kCal">kCal</th>
+                                </tr>
+                            </table>
+                        </div>
                     </div>
-                    <div id="food_list_body">
-                        <table id="food_list_table">
-                            <tr class="food_entry">
-                                <th class="food_filler"></th>
-                                <th class="food_icon">F</th>
-                                <th class="food_name">name of the food goes here , but after a certain point, we should probably just cut off the name</th>
-                                <th class="food_quantity">#</th>
-                                <th class="food_unit">Serving size/unit</th>
-                                <th class="food_calories">calc for calories</th>
-                                <th class="food_kCal">kCal</th>
-                            </tr>
-                            <tr class="food_entry">
-                                <th class="food_filler"></th>
-                                <th class="food_icon">F</th>
-                                <th class="food_name">name of the food goes here</th>
-                                <th class="food_quantity">#</th>
-                                <th class="food_unit">Serving size/unit</th>
-                                <th class="food_calories">calc for calories</th>
-                                <th class="food_kCal">kCal</th>
-                            </tr>
-                            <tr class="food_entry">
-                                <th class="food_filler"></th>
-                                <th class="food_icon">F</th>
-                                <th class="food_name">name of the food goes here</th>
-                                <th class="food_quantity">#</th>
-                                <th class="food_unit">Serving size/unit</th>
-                                <th class="food_calories">calc for calories</th>
-                                <th class="food_kCal">kCal</th>
-                            </tr>
-                            <tr class="food_entry">
-                                <th class="food_filler"></th>
-                                <th class="food_icon">F</th>
-                                <th class="food_name">name of the food goes here</th>
-                                <th class="food_quantity">#</th>
-                                <th class="food_unit">Serving size/unit</th>
-                                <th class="food_calories">calc for calories</th>
-                                <th class="food_kCal">kCal</th>
-                            </tr>
-                        </table>
-                    </div>
-                </div>
-                <!-- PERCENTAGES -->
-                <div id="daily_totals">
-                    <div id="energy_bars">ENERGY BARS </div>
-                    <div id="seperator"></div>
-                    <div id="macro_bars">MACRO BARS </div>
-                </div>
-            </div>
-            <!-- CALENDAR -->
-            <div id="calendar_section">
-                <div id="calendar_remote">
-                    <div id="month_back"><<</div>
-                    <div id="day_back"><</div>
-                    <div id="date">Mar 16</div>
-                    <div id="day_forward">></div>
-                    <div id="month_forward">>></div>
-                </div>
-                <div id="calendar_grid">
-                    <div id="month">March</div>
-                    <table id="days">
-                        <tr>
-                            <th>S</th>
-                            <th>M</th>
-                            <th>T</th>
-                            <th>W</th>
-                            <th>Th</th>
-                            <th>F</th>
-                            <th>S</th>
-                        </tr>
-                        <tr>
-                            <th class="day">1</th>
-                            <th class="day">2</th>
-                            <th class="day">3</th>
-                            <th class="day">4</th>
-                            <th class="day">5</th>
-                            <th class="day">6</th>
-                            <th class="day">7</th>
-                        </tr>
-                        <tr>
-                            <th class="day">8</th>
-                            <th class="day">9</th>
-                            <th class="day">10</th>
-                            <th class="day">11</th>
-                            <th class="day">12</th>
-                            <th class="day">13</th>
-                            <th class="day">14</th>
-                        </tr>
-                        <tr>
-                            <th class="day">15</th>
-                            <th class="day">16</th>
-                            <th class="day">17</th>
-                            <th class="day">18</th>
-                            <th class="day">19</th>
-                            <th class="day">20</th>
-                            <th class="day">21</th>
-                            
-                        </tr>
-                        <tr>
-                            <th class="day">22</th>
-                            <th class="day">23</th>
-                            <th class="day">24</th>
-                            <th class="day">25</th>
-                            <th class="day">26</th>
-                            <th class="day">27</th>
-                            <th class="day">28</th>
-                        </tr>
-                        <tr>
-                            <th class="day">29</th>
-                            <th class="day">30</th>
-                            <th class="day">31</th>
-                        </tr>
-                    </div>
+                    <!-- PERCENTAGES -->
+                    <div class="daily_totals">
+                        <div class="energy_bars">ENERGY BARS </div>
+                        <div class="seperator"></div>
+                        <div class="macro_bars">MACRO BARS </div>
                     </div>
                 </div>
+                <!-- CALENDAR -->
+                <div class="calendar_section">
+                    <div class="calendar_remote">
+                        <div class="month_back"><<</div>
+                        <div class="day_back"><</div>
+                        <div class="date">Mar 16</div>
+                        <div class="day_forward">></div>
+                        <div class="month_forward">>></div>
+                    </div>
+                    <div class="calendar_grid">
+                        <div class="month">March</div>
+                        <table class="days">
+                            <tr>
+                                <th>S</th>
+                                <th>M</th>
+                                <th>T</th>
+                                <th>W</th>
+                                <th>Th</th>
+                                <th>F</th>
+                                <th>S</th>
+                            </tr>
+                            <tr>
+                                <th class="day">1</th>
+                                <th class="day">2</th>
+                                <th class="day">3</th>
+                                <th class="day">4</th>
+                                <th class="day">5</th>
+                                <th class="day">6</th>
+                                <th class="day">7</th>
+                            </tr>
+                            <tr>
+                                <th class="day">8</th>
+                                <th class="day">9</th>
+                                <th class="day">10</th>
+                                <th class="day">11</th>
+                                <th class="day">12</th>
+                                <th class="day">13</th>
+                                <th class="day">14</th>
+                            </tr>
+                            <tr>
+                                <th class="day">15</th>
+                                <th class="day">16</th>
+                                <th class="day">17</th>
+                                <th class="day">18</th>
+                                <th class="day">19</th>
+                                <th class="day">20</th>
+                                <th class="day">21</th>
+                                
+                            </tr>
+                            <tr>
+                                <th class="day">22</th>
+                                <th class="day">23</th>
+                                <th class="day">24</th>
+                                <th class="day">25</th>
+                                <th class="day">26</th>
+                                <th class="day">27</th>
+                                <th class="day">28</th>
+                            </tr>
+                            <tr>
+                                <th class="day">29</th>
+                                <th class="day">30</th>
+                                <th class="day">31</th>
+                            </tr>
+                        </div>
+                        </div>
+                    </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-    
-
-
-
-
   <script defer src="../bundle.js"></script>
 </body>
 </html>
