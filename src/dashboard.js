@@ -49,6 +49,8 @@ import {
   
   
   // -----------------------------------------------------------------------------
+/* TODO - easier temp inputs to Foods db for demo
+   TODO - make the table fill with entries
 
 document.addEventListener('DOMContentLoaded', () => {
     if (window.location.pathname === '/dist/pages/dashboard.html') {
@@ -61,8 +63,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-const addFoodButton = document.querySelector('.add_food_button')
-addFoodButton.addEventListener('click', () => {
+const addFoodFinalize = document.querySelector('.add_food_Finalize')
+addFoodFinalize.addEventListener('click', () => {
   <tr class="food_entry">
     <th class="food_filler"></th>
     <th class="food_icon"></th>
@@ -73,3 +75,32 @@ addFoodButton.addEventListener('click', () => {
     <th class="food_kCal"></th>
 </tr>
 })
+*/
+
+// POP UPS ---------------------------------------------------------------------
+  //FOOD
+let addFoodButton = document.querySelector('#food_image')
+if(addFoodButton){
+  addFoodButton.addEventListener('click', () => {
+    event.stopPropagation();
+    console.log("obamna")
+    let blur = document.querySelector('.dash');
+    blur.classList.toggle('blur_active')
+    let popup = document.querySelector('.popup');
+    popup.classList.toggle('popup_active')
+  })
+}
+
+  //DISMISS POPUPS
+if (window.location.pathname === '/dist/pages/dashboard.html') {
+  document.addEventListener('click', function(event) {
+    let popup = document.querySelector('.popup');
+    let isClickInside = popup.contains(event.target);
+    let blur = document.querySelector('.dash');
+  
+    if (!isClickInside && popup.classList.contains('popup_active')) {
+      popup.classList.remove('popup_active');
+      blur.classList.remove('blur_active');
+    }
+  });
+}
