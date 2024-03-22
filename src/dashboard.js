@@ -78,23 +78,55 @@ addFoodFinalize.addEventListener('click', () => {
 */
 
 // POP UPS ---------------------------------------------------------------------
-  //FOOD
+//EXERCISE
 let addFoodButton = document.querySelector('#food_image')
 if(addFoodButton){
   addFoodButton.addEventListener('click', () => {
-    event.stopPropagation();
+    let windowSelection = '.food_popup'
+    popupWindow(windowSelection);
+  })
+}
+
+//EXERCISE
+let addExerciseButton = document.querySelector('#exercise_image')
+if(addExerciseButton){
+  addExerciseButton.addEventListener('click', () => {
+    let windowSelection = '.exercise_popup'
+    popupWindow(windowSelection);
+  })
+}
+
+//BIOMETRICS
+let addBioButton = document.querySelector('#biometric_image')
+if(addBioButton){
+  addBioButton.addEventListener('click', () => {
+    let windowSelection = '.biometric_popup'
+    popupWindow(windowSelection);
+  })
+}
+
+//NOTES
+let addNotesButton = document.querySelector('#notes_image')
+if(addNotesButton){
+  addNotesButton.addEventListener('click', () => {
+    let windowSelection = '.notes_popup'
+    popupWindow(windowSelection);
+  })
+}
+
+function popupWindow(windowSelection) {
+  event.stopPropagation();
     console.log("obamna")
     let blur = document.querySelector('.dash');
     blur.classList.toggle('blur_active')
-    let popup = document.querySelector('.popup');
+    let popup = document.querySelector(windowSelection);
     popup.classList.toggle('popup_active')
-  })
 }
 
   //DISMISS POPUPS
 if (window.location.pathname === '/dist/pages/dashboard.html') {
   document.addEventListener('click', function(event) {
-    let popup = document.querySelector('.popup');
+    let popup = document.querySelector('.popup_active');
     let isClickInside = popup.contains(event.target);
     let blur = document.querySelector('.dash');
   
@@ -104,3 +136,4 @@ if (window.location.pathname === '/dist/pages/dashboard.html') {
     }
   });
 }
+

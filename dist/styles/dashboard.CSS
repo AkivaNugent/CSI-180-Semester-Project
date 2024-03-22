@@ -1,3 +1,8 @@
+/* Page Wide stuff */
+body{
+    margin: 0;
+}
+
 /* HEADER */
 .header_bar{
 display: flex;
@@ -23,18 +28,18 @@ display: inline-block;
     left: 50%;
     transform: translate(-50%, -50%);
     width: 1300px;
+    min-height : 850px;
     padding: 50px;
     box-shadow: 0 5px 30px rgba(0,0,0,.30);
     background: white;
     border: solid;
     border-radius: 25px ;
     visibility: hidden;
-    opacity: 0;
     transition: 0.25s;
 }
 .popup_active{
     top: 50%;
-    visibility:visible;
+    visibility: visible;
     opacity: 1;
     transition: 0.25s;
 }
