@@ -20,7 +20,8 @@ import {
   query,
   where,
   orderBy,
-  serverTimestamp
+  serverTimestamp,
+  getDoc
   } from 'firebase/firestore';
 
 import { 
@@ -54,7 +55,7 @@ const provider = new GoogleAuthProvider()
 
 // -----------------------------------------------------------------------------
 // collection ref
-const colRef = collection(db, 'biometrics');
+const colRef = collection(db, 'Biometrics');
 const foodCol = collection(db, 'Foods');
 
 //queries
@@ -78,22 +79,32 @@ const unsubCol = onSnapshot(q, (snapshot) => {
 })
 
 
+
   // adding entry
 const addBiometric = document.querySelector('.add')
 if(addBiometric){
   addBiometric.addEventListener('submit', (e) => {
     e.preventDefault()
+    const user = auth.currentUser;
     const currentTime = serverTimestamp()
-    addDoc(colRef, {
-      height: addBiometric.height.value,
-      weight: addBiometric.weight.value,
-      datetime: currentTime
-    })
-    .then(() =>{
-      //console.log(currentTime)
-      addBiometric.reset()  
-    })
+    if(user == null){
+      console.log('log in, dipshit')
+      alert('you must be logged in to add a biometric')
+    } 
+    else{
+      addDoc(colRef, {
+        height: addBiometric.height.value,
+        weight: addBiometric.weight.value,
+        datetime: currentTime,
+        uid: user.uid
+      })
+      .then(() =>{
+        console.log(currentTime)
+        addBiometric.reset()  
+    })}
+    
   })}
+  
 
 // deleting entry
 const deleteBiometric = document.querySelector('.delete')
@@ -210,22 +221,3 @@ unsubButton.addEventListener('click', () => {
 export function redirectToDash() {
   window.location.href = 'pages/dashboard.html'
 }
-
- // adding entry
- const addFood = document.querySelector('foodform')
- if(addFood){
-   addFood.addEventListener('submit', (e) => {
-     e.preventDefault()
-     addDoc(foodCol, {
-       name: foodform.name.value,
-       fid: foodform.fid.value,
-       serving_size: foodform.serving_size.value,
-       calories: foodform.calories.value,
-       protein: foodform.protien.value,
-       carbs: foodform.carbs.value,
-       fats: foodform.fats.value,
-     })
-     .then(() =>{
-       addFood.reset()  
-     })
-   })}

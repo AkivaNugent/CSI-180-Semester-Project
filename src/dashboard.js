@@ -47,22 +47,37 @@ import {
   const auth = getAuth();
   const provider = new GoogleAuthProvider()
   
+  // -----------------------------------------------------------------------------
+// collection ref
+const colRef = collection(db, 'biometrics');
+const foodCol = collection(db, 'Foods');
   
   // -----------------------------------------------------------------------------
-/* TODO - easier temp inputs to Foods db for demo
-   TODO - make the table fill with entries
+  // TODO - easier temp inputs to Foods db for demo
+  // TODO - make the table fill with entries
 
-document.addEventListener('DOMContentLoaded', () => {
-    if (window.location.pathname === '/dist/pages/dashboard.html') {
-        auth.onAuthStateChanged((user) => {
-            if (user) {
-                const headElement = document.querySelector('.account_btn')
-                headElement.innerHTML = user.displayName
-            } 
-        });
-    }
-});
 
+ // adding entry
+ const addFood = document.querySelector('.foodform')
+ if(addFood){
+   addFood.addEventListener('submit', (e) => {
+     e.preventDefault()
+     addDoc(foodCol, {
+       name: addFood.name.value,
+       fid: addFood.fid.value,
+       serving_size: addFood.serving_size.value,
+       calories: addFood.calories.value,
+       protein: addFood.protien.value,
+       carbs: addFood.carbs.value,
+       fats: addFood.fats.value,
+     })
+     .then(() =>{
+       addFood.reset()  
+     })
+   })}
+
+
+/*
 const addFoodFinalize = document.querySelector('.add_food_Finalize')
 addFoodFinalize.addEventListener('click', () => {
   <tr class="food_entry">

@@ -8,17 +8,28 @@
 </head>
 <body>
     <form class="foodform">
-        <input type="text" name="name" placeholder="name">
+        <input type="text" name="name" placeholder="name" required>
         <input type="text" name="fid" placeholder="fid">
-        <input type="text" name="serving_size" placeholder="serving size">
-        <input type="text" name="calories" placeholder="calories">
-        <input type="text" name="protien" placeholder="protien">
-        <input type="text" name="carbs" placeholder="carbs">
-        <input type="text" name="fats" placeholder="fats">
+        <input type="text" name="serving_size" placeholder="serving size" required>
+        <input type="text" name="calories" placeholder="calories" required>
+        <input type="text" name="protien" placeholder="protien" required>
+        <input type="text" name="carbs" placeholder="carbs" required>
+        <input type="text" name="fats" placeholder="fats" required>
         <button>Submit Food</button>
     </form>
     <!-- POPUPS -->
-    <div class="food_popup popup"><h1> ADD A FOOD </h1></div>
+    <div class="food_popup popup">
+        <h1> ADD A FOOD </h1>
+        <div class="search_and_find_foods">
+            <form class="food_search">
+                <input type="text" class="food_search_input" placeholder="search for a food...">
+                <button class="food_search_button">SEARCH</button>
+            </div>
+            <div class="food_results"></div>
+        </div>
+        
+
+    </div>
     <div class="exercise_popup popup"><h1> ADD AN EXERCISE </h1></div>
     <div class="biometric_popup popup"><h1> ADD A BIOMETRIC </h1></div>
     <div class="notes_popup popup"><h1> ADD A NOTE </h1></div>
