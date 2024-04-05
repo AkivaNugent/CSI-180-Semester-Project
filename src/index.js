@@ -80,7 +80,7 @@ const unsubCol = onSnapshot(q, (snapshot) => {
 
 
 
-  // adding entry
+// adding entry
 const addBiometric = document.querySelector('.add')
 if(addBiometric){
   addBiometric.addEventListener('submit', (e) => {

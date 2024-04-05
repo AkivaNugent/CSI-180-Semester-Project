@@ -6,6 +6,7 @@ import {
     getFirestore, 
     collection, 
     onSnapshot,
+    getDocs,
     addDoc,
     deleteDoc,
     updateDoc,
@@ -13,7 +14,9 @@ import {
     query,
     where,
     orderBy,
-    serverTimestamp
+    serverTimestamp,
+    snapshotEqual,
+    QueryStartAtConstraint
     } from 'firebase/firestore';
   
   import { 
@@ -46,18 +49,51 @@ import {
   const db = getFirestore();
   const auth = getAuth();
   const provider = new GoogleAuthProvider()
-  
-  // -----------------------------------------------------------------------------
+
+//DateSet
+let pullDate = new Date()
+
+// -----------------------------------------------------------------------------
 // collection ref
 const colRef = collection(db, 'biometrics');
 const foodCol = collection(db, 'Foods');
+const entryCol = collection(db, 'Food_Entry')
   
-  // -----------------------------------------------------------------------------
-  // TODO - easier temp inputs to Foods db for demo
-  // TODO - make the table fill with entries
+// Queries
+
+const entryQ = query(entryCol,
+  where("uid", "==", auth.currentUser.uid )
+)
+
+/*
+document.addEventListener('DOMContentLoaded', () => {
+  auth.onAuthStateChanged(user => {
+    if (user) {
+      const entryQ = query(entryCol, 
+        where('userId', '==', user.uid)
+      )
+      const unsubEntry = onSnapshot(entryQ, (snapshot) => {
+        let entryList = []
+        snapshot.docs.forEach((doc) => {
+          entryList.push({ ...doc.data(), id: doc.id })
+        } )
+        console.log('Entry list')
+        console.log(entryList)
+      })
+    } else {
+      // No user is signed in
+      console.log('No user is currently logged in.');
+    }
+  });
+});
+
+*/
+// -----------------------------------------------------------------------------
+// TODO - easier temp inputs to Foods db for demo
+// TODO - make the table fill with entries
 
 
- // adding entry
+ // adding entry -------------------------------------------------------TAKE OUT
  const addFood = document.querySelector('.foodform')
  if(addFood){
    addFood.addEventListener('submit', (e) => {
@@ -93,7 +129,7 @@ addFoodFinalize.addEventListener('click', () => {
 */
 
 // POP UPS ---------------------------------------------------------------------
-//EXERCISE
+//FOOD
 let addFoodButton = document.querySelector('#food_image')
 if(addFoodButton){
   addFoodButton.addEventListener('click', () => {
@@ -152,3 +188,60 @@ if (window.location.pathname === '/dist/pages/dashboard.html') {
   });
 }
 
+//FOOD FORM
+function generateTableHTML(data) {
+  let html = '<table class="results_table">';
+  // Table header
+  html += '<thead class="results_thead"><tr class="results_tr"><th class="results_th">Name</th><th class="results_th">Calories</th></tr></thead>';
+  // Table body
+  html += '<tbody class="results_tbody">';
+  data.forEach(item => {
+    html += `<tr class="results_tr"><td class="results_td">${item.name}</td><td class="results_td">${item.calories}</td></tr>`;
+  });
+  html += '</tbody></table>';
+  return html;
+}
+
+const foodSearch = document.querySelector('.food_search')
+if(foodSearch){
+  foodSearch.addEventListener('submit', (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    //console.log('clicked 1')
+    const searchTerm = foodSearch.foodSearchInput.value.trim()
+    foodSearch.reset()
+    const q = query(
+      foodCol,
+      where("name", ">=", searchTerm),
+      where("name", "<=", searchTerm + "\uf8ff")
+    );
+    getDocs(q)
+      .then((snapshot) => {
+        let results = []
+        snapshot.docs.forEach((doc) => {
+          results.push({...doc.data(), id: doc.id })
+        })
+        //console.log(results)
+
+        let resultsHTML = document.querySelector('.food_results')
+        resultsHTML.innerHTML = generateTableHTML(results)
+      })
+  })
+}
+
+/*
+let q = query(foodCol, 
+  where("name", ">=", searchTerm),
+  where("name", "<=", searchTerm)
+)
+*/
+
+//main page entry accoutning
+// real time collection data
+onSnapshot(entryQ, (snapshot) => {
+  let entries = []
+  snapshot.docs.forEach((doc) => {
+    entries.push({ ...doc.data(), id: doc.id })
+  } )
+  console.log(entries)
+})

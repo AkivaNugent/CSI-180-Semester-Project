@@ -63,7 +63,18 @@ display: inline-block;
     min-height: 500px;
     margin: 1%;
 }
-
+.results_table{
+    background-color: red;
+    width: 100%;
+}
+.reuslts_thead
+.reuslts_th
+.reuslts_tr{
+    height: 100px;
+}
+.reuslts_td{
+    height: 100px;
+}
 /* CONTENT */
 .dash{
     display: flex;
