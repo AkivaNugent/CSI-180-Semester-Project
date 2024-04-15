@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="../styles/dashboard.CSS">
 </head>
 <body>
+    <!--
     <form class="foodform">
         <input type="text" name="name" placeholder="name" required>
         <input type="text" name="fid" placeholder="fid">
@@ -17,7 +18,7 @@
         <input type="text" name="fats" placeholder="fats" required>
         <button>Submit Food</button>
     </form>
-
+    -->
     <!-- POPUPS -->
     <!-- FOOD POPUP -->
     <div class="food_popup popup">
@@ -26,8 +27,22 @@
             <form class="food_search">
                 <input type="text" class="food_search_input" name="foodSearchInput" placeholder="search for a food...">
                 <button class="food_search_button">SEARCH</button>
+            </form>
+        </div>
+        <div class="food_results"></div>
+        <div class="food_selection_panel">
+            <div class="food_selection_info">
+                <div class="food_selection_protien"></div>
+                <div class="food_selection_carbs"></div>
+                <div class="food_selection_fats"></div>
+                <div class="food_selection_calories"></div>
             </div>
-            <div class="food_results"></div>
+            <form class="food_selection_form">
+                <input type="number" name="food_selection_servings_input" class="food_selection_servings_input" >
+                <button>Confirm</button>
+            </form>
+        </div>  
+        </div>
         </div>
     </div>
     <!-- EXERCISE POPUP -->
@@ -70,52 +85,21 @@
                                 <img class="flh_image" id="notes_image" src="https://pbs.twimg.com/media/GJJT2I1XgAAJbKf?format=png&name=small" alt="notes">
                             </div>
                         </div>
-                        <div class="food_list_body">
-                            <table class="food_list_table">
-                                <tr class="food_entry">
-                                    <th class="food_filler"></th>
-                                    <th class="food_icon">F</th>
-                                    <th class="food_name">name of the food goes here , but after a certain point, we should probably just cut off the name</th>
-                                    <th class="food_quantity">#</th>
-                                    <th class="food_unit">Serving size/unit</th>
-                                    <th class="food_calories">calc for calories</th>
-                                    <th class="food_kCal">kCal</th>
-                                </tr>
-                                <tr class="food_entry">
-                                    <th class="food_filler"></th>
-                                    <th class="food_icon">F</th>
-                                    <th class="food_name">name of the food goes here</th>
-                                    <th class="food_quantity">#</th>
-                                    <th class="food_unit">Serving size/unit</th>
-                                    <th class="food_calories">calc for calories</th>
-                                    <th class="food_kCal">kCal</th>
-                                </tr>
-                                <tr class="food_entry">
-                                    <th class="food_filler"></th>
-                                    <th class="food_icon">F</th>
-                                    <th class="food_name">name of the food goes here</th>
-                                    <th class="food_quantity">#</th>
-                                    <th class="food_unit">Serving size/unit</th>
-                                    <th class="food_calories">calc for calories</th>
-                                    <th class="food_kCal">kCal</th>
-                                </tr>
-                                <tr class="food_entry">
-                                    <th class="food_filler"></th>
-                                    <th class="food_icon">F</th>
-                                    <th class="food_name">name of the food goes here</th>
-                                    <th class="food_quantity">#</th>
-                                    <th class="food_unit">Serving size/unit</th>
-                                    <th class="food_calories">calc for calories</th>
-                                    <th class="food_kCal">kCal</th>
-                                </tr>
-                            </table>
-                        </div>
+                        <div class="food_list_body"></div>
                     </div>
                     <!-- PERCENTAGES -->
                     <div class="daily_totals">
-                        <div class="energy_bars">ENERGY BARS </div>
+                        <div class="energy_bars">
+                            <h1>ENERGY BAR</h1>
+                            <div class="calorie_total">LOADING...</div>
+                        </div>
                         <div class="seperator"></div>
-                        <div class="macro_bars">MACRO BARS </div>
+                        <div class="macro_bars">
+                            <h1>MACRO BARS</h1>
+                            <div class="protien_total">LOADING...</div>
+                            <div class="carb_total">LOADING...</div>
+                            <div class="fats_total">LOADING...</div>
+                        </div>
                     </div>
                 </div>
                 <!-- CALENDAR -->

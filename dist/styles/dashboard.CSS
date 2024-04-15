@@ -46,9 +46,10 @@ display: inline-block;
 .food_popup{
     display: flex;
     flex-direction: column;
+    justify-content:space-between;
 }
 .food_search_input{
-    width: 80%;
+    width: 85%;
     margin: 1%;
 }
 .food_search_button{
@@ -58,22 +59,50 @@ display: inline-block;
 .food_results{
     border: solid;
     border-radius: 25px;
-    width: 92%;
+    width: 98%;
     height: 50%;
     min-height: 500px;
     margin: 1%;
 }
 .results_table{
-    background-color: red;
     width: 100%;
 }
-.reuslts_thead
-.reuslts_th
-.reuslts_tr{
-    height: 100px;
+.results_thead
+.reuslts_th{
+    height: 30px;
+    border-bottom: 1px solid #000;
 }
-.reuslts_td{
-    height: 100px;
+.results_tr{
+    height: 30px;
+    border-bottom: 1px solid #000;
+}
+.results_td{
+    height: 30px;
+    border-bottom: 1px solid #000;
+}
+.food_selection_panel{
+    display: flex;
+    flex-direction: row;
+    height: 200px;
+}
+.food_selection_info{
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+    flex: 3;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-right: 50px;
+    font-size: 30px;
+}
+.food_selection_form{
+    display: flex;
+    align-items: center;
+    flex: 1;
+}
+.highlighted{
+    background-color: whitesmoke;
 }
 /* CONTENT */
 .dash{
