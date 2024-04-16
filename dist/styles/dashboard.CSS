@@ -272,6 +272,7 @@ width: 100px;
     display: flex;
     margin: 10px;
     height: 300px;
+    
 }
     .energy_bars{
         display: flex;
@@ -289,4 +290,16 @@ width: 100px;
         display: flex;
         margin: 30px;
         flex-grow: 1;
+    }
+    .protein_total{
+        padding: 10px;
+    }
+    .carb_total{
+        padding: 10px;
+    }
+    .fats_total{
+        padding: 10px;
+    }
+    .calorie_total{
+        padding: 10px;
     }

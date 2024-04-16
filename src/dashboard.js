@@ -263,13 +263,13 @@ if(foodSearch){
   })
 }
 
-auth.onAuthStateChanged(function(user) {
+auth.onAuthStateChanged(async function(user) {
   if (user) {
     var uid = user.uid;
     console.log('logged in :' + uid)
-    updateEntryTable(uid);
+    await updateEntryTable(uid);
     updateMacroTotals()
-    console.log('done')
+    //console.log('done')
     
   } else {
     console.log('not getting the uid for the table')
@@ -314,12 +314,44 @@ async function updateMacroTotals() {
   console.log('before try statement')
   try {
     //CALCULATES Total Calories
-    console.log('before html update')
+    //FILLER STUFF
     let calorieTotal = document.querySelector('.calorie_total')
+    let protienotal = document.querySelector('.protein_total')
+    let carbTotal = document.querySelector('.carb_total')
+    let fatsTotal = document.querySelector('.fats_total')
     let calorieTotalHTML = ""
-    calorieTotalHTML += `OBAMNA`
-    calorieTotal.innerHTML = "OBAMNA 2 THE RE-BOMANING"
-    console.log('after html update')
+    calorieTotalHTML += `OBAMNA 2 THE RE-BOMNAING`
+    calorieTotal.innerHTML = calorieTotalHTML
+    
+    let FoodEntryRow = 0;
+    let calorieSum = 0;
+    let proteinSum  = 0;
+    let carbSum = 0;
+    let fatsSum = 0;
+    let entryRow
+
+    while(FoodEntryRow < 999){
+      console.log('were in boys')
+      entryRow = document.getElementById(`food_entry ${FoodEntryRow}`)
+      if(!entryRow){
+        console.log(entryRow)
+        console.log('i am breaking on ' + FoodEntryRow)
+        break
+      }
+      
+      calorieSum += parseFloat(entryRow.dataset.calories)
+      proteinSum += parseFloat(entryRow.dataset.protein)
+      carbSum += parseFloat(entryRow.dataset.carbs)
+      fatsSum += parseFloat(entryRow.dataset.fats)
+      FoodEntryRow++
+    }
+    
+    calorieTotal.innerHTML = calorieSum.toFixed(2) + " kCal"
+    protienotal.innerHTML = proteinSum.toFixed(2) + " P"
+    carbTotal.innerHTML = carbSum.toFixed(2) + " C"
+    fatsTotal.innerHTML = fatsSum.toFixed(2) + " F"
+
+
   }
   catch (err) {
     console.error('Error making the macros calc', err)
@@ -330,7 +362,7 @@ async function generateEntryTableHTML(FoodResults) {
   let tableHTMLinsert = '';
 
   tableHTMLinsert = `
-    <table class="food_list_table">
+    <table class="food_list_table" >
         <thead>
             <tr class="food_entry">
                 <th class="food_filler"></th>
@@ -353,12 +385,12 @@ async function generateEntryTableHTML(FoodResults) {
           querySnapshot.forEach((doc) => {
               const foodInfo = doc.data();
               let calories = (foodInfo.calories * (item.servings / foodInfo.serving_size)).toFixed(2);
-              let protein = (foodInfo.protien * (item.servings / foodInfo.serving_size)).toFixed(2);
+              let protein = (foodInfo.protein * (item.servings / foodInfo.serving_size)).toFixed(2);
               let carbs = (foodInfo.carbs * (item.servings / foodInfo.serving_size)).toFixed(2);
               let fats = (foodInfo.fats * (item.servings / foodInfo.serving_size)).toFixed(2);
 
               tableHTMLinsert += `
-                  <tr class="food_entry" id="entry ${index}" data-id="${item.id}" data-protein="${protein}" data-carbs="${carbs}" data-fats="${fats}" data-calories="${calories}">
+                  <tr class="food_entry" id="food_entry ${index}" data-id="${item.id}" data-protein="${protein}" data-carbs="${carbs}" data-fats="${fats}" data-calories="${calories}">
                       <td class="food_filler"></td>
                       <td class="food_icon">Food</td>
                       <td class="food_name">${foodInfo.name}</td>
@@ -370,14 +402,15 @@ async function generateEntryTableHTML(FoodResults) {
               `;
           });
 
-        tableHTMLinsert += `
-        </tbody>
-        </table>
-        `;
       } catch (error) {
           console.error('Error getting food info:', error);
       }
   }
+
+  tableHTMLinsert += `
+        </tbody>
+        </table>
+        `;
 
   return tableHTMLinsert;
 }
