@@ -237,7 +237,7 @@ width: 100px;
     margin: 0;
     width: 100%;
 }
-.food_entry{
+.table_entry{
     height: 30px;
 }
 .food_filler{
@@ -270,12 +270,14 @@ width: 100px;
     border: solid;
     border-radius: 25px;
     display: flex;
+    flex-direction: row;
     margin: 10px;
     height: 300px;
     
 }
     .energy_bars{
         display: flex;
+        flex-direction: column;
         margin: 30px;
         flex-grow: 1;
     }
@@ -288,18 +290,45 @@ width: 100px;
     }
     .macro_bars{
         display: flex;
+        flex-direction: column;
         margin: 30px;
         flex-grow: 1;
+
     }
-    .protein_total{
+    .protein_total, .carb_total, .fats_total, .calorie_total{
         padding: 10px;
     }
-    .carb_total{
-        padding: 10px;
+    .protein_total, .carb_total, .fats_total, .calorie_total {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+    *, *::before, *::after {
+        box-sizing: border-box;
     }
-    .fats_total{
-        padding: 10px;
+
+    body {
+        padding: 0;
+        margin: 0;
     }
-    .calorie_total{
-        padding: 10px;
+    
+    .protein_bar, .carb_bar, .fats_bar, .calorie_bar {
+        position: relative;
+        height: 20px;
+        flex: 1;
+        margin-left: 20px;
+        margin-right: 20px;
+        background-color: #c7c7c7;
+        color: rgb(0, 153, 25);
+    }
+    
+    .protein_bar::before, .carb_bar::before, .fats_bar::before, .calorie_bar::before  {
+        content: attr(data-label);
+        display: flex;
+        align-items: center;
+        width: calc(var(--width, 0) * 1%);
+        min-width: 1px;
+        max-width: calc(100%);
+        background-color: rgb(0, 153, 25);
     }

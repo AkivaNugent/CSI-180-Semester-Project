@@ -42,13 +42,43 @@
                 <button>Confirm</button>
             </form>
         </div>  
-        </div>
-        </div>
     </div>
     <!-- EXERCISE POPUP -->
-    <div class="exercise_popup popup"><h1> ADD AN EXERCISE </h1></div>
+    <div class="exercise_popup popup">
+        <h1> ADD AN EXERCISE </h1>
+        <div class="columns">
+            <h2>Exercise Type</h2>
+            <select class="exercise_select">
+                <option value="lifting weights">Lifting Weights</option>
+                <option value="running">Running</option>
+                <option value="walking">Walking</option>
+                <option value="cycling">Cycling</option>
+                <option value="biking">Biking</option>
+                <option value="swimming">Swimming</option>  
+            </select>
+            <h2>Calories Burned</h2>
+            <form class="excercise_form">
+                <input type="number" class="exercise_calories" placeholder="100">
+                <button class="exercise_submit_button">subimt</button>
+            </form>
+        </div> 
+    </div>
     <!-- BIOMETRIC POPUP -->
-    <div class="biometric_popup popup"><h1> ADD A BIOMETRIC </h1></div>
+    <div class="biometric_popup popup">
+        <h1> ADD A BIOMETRIC </h1>
+        <div class="columns">
+            <h2>Exercise Type</h2>
+            <select class="biometric_select">
+                <option value="height">Height (cm)</option>
+                <option value="weight">Weight (kg)</option>
+            </select>
+            <h2>Biometric Value</h2>
+            <form class="biometric_form">
+                <input type="number" class="biometric_value" placeholder="100">
+                <button class="biometric_submit_button">subimt</button>
+            </form>
+        </div> 
+    </div>
     <!-- NOTES POPUP -->
     <div class="notes_popup popup"><h1> ADD A NOTE </h1></div>
 
@@ -91,14 +121,31 @@
                     <div class="daily_totals">
                         <div class="energy_bars">
                             <h1>ENERGY BAR</h1>
-                            <div class="calorie_total">LOADING...</div>
+                            <div class="calorie_total">
+                                <span class="calorie_value">LOADING...</span> 
+                                <div class="calorie_bar" style="--width: 0" data-label="_"></div>
+                                <span class="calorie_limit"></span>
+                            </div>
                         </div>
                         <div class="seperator"></div>
                         <div class="macro_bars">
                             <h1>MACRO BARS</h1>
-                            <div class="protein_total">LOADING...</div>
-                            <div class="carb_total">LOADING...</div>
-                            <div class="fats_total">LOADING...</div>
+                            <div class="protein_total">
+                                <span class="protein_value">LOADING...</span>
+                                <div class="protein_bar" style="--width: 0" data-label="_"></div>
+                                <span class="protein_limit"></span>
+                            </div>
+                            <div class="carb_total">
+                                <span class="carb_value">LOADING...</span>
+                                <div class="carb_bar" style="--width: 0" data-label="_"></div>
+                                <span class="carb_limit"></span>
+                            </div>
+                            <div class="fats_total">
+                                <span class="fats_value">LOADING...</span> 
+                                <div class="fats_bar" style="--width: 0" data-label="_"></div>
+                                <span class="fats_limit"></span>
+                            </div>
+                            
                         </div>
                     </div>
                 </div>

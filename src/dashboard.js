@@ -29,7 +29,6 @@ import {
     signInWithPopup
     } from 'firebase/auth';
   
-  
   const firebaseConfig = {
     apiKey: "AIzaSyA3Yyk4IFO2-h7fGTfXYxE8fyNeOhKjUeI",
     authDomain: "nutrition-tracking-app-26132.firebaseapp.com",
@@ -48,18 +47,16 @@ import {
   // init services
   const db = getFirestore();
   const auth = getAuth();
-  const provider = new GoogleAuthProvider()
 
 //DateSet
 let pullDate = new Date()
 
 // -----------------------------------------------------------------------------
 // collection ref
-const colRef = collection(db, 'biometrics');
+const bioRef = collection(db, 'Biometrics');
 const foodCol = collection(db, 'Foods');
 const entryCol = collection(db, 'Food_Entry')
-  
-// Queries
+const exerciseCol = collection(db, 'exercise')
 
 // -----------------------------------------------------------------------------
 // TODO - make the table fill with entries
@@ -124,14 +121,13 @@ if(addNotesButton){
 
 function popupWindow(windowSelection) {
   event.stopPropagation();
-    console.log("obamna")
     let blur = document.querySelector('.dash');
     blur.classList.toggle('blur_active')
     let popup = document.querySelector(windowSelection);
     popup.classList.toggle('popup_active')
 }
 
-  //DISMISS POPUPS
+//DISMISS POPUPS
 if (window.location.pathname === '/dist/pages/dashboard.html') {
   document.addEventListener('click', function(event) {
     dismissPopup(event);
@@ -168,7 +164,6 @@ function addRowClickEventListeners(data) {
     const row = document.getElementById(`row-${index}`);
     if (row) {
       row.addEventListener('click', () => {
-        //console.log(item);
         let highlight = document.querySelectorAll('.highlighted')
         highlight.forEach(function(highlight) {
           highlight.classList.remove('highlighted');
@@ -219,9 +214,6 @@ function addRowClickEventListeners(data) {
   });
 }
 
-
-
-
 function updateNutritionalValues(protienPS, carbsPS, fatsPS, caloriesPS, serving, amount) {
   let multiplier = amount / serving;
   document.querySelector('.food_selection_protien').textContent = (protienPS * multiplier).toFixed(2) + 'p';
@@ -263,46 +255,155 @@ if(foodSearch){
   })
 }
 
-auth.onAuthStateChanged(async function(user) {
-  if (user) {
-    var uid = user.uid;
-    console.log('logged in :' + uid)
-    await updateEntryTable(uid);
-    updateMacroTotals()
-    //console.log('done')
+//Adding Exercises
+const exerciseForm = document.querySelector('.exercise_submit_button')
+if(exerciseForm) {
+  exerciseForm.addEventListener('click', (e) =>{
+    e.preventDefault();
+    e.stopPropagation();
+
+    let exCalories = document.querySelector('.exercise_calories').value;
+    let exType = document.querySelector('.exercise_select').value;
     
-  } else {
-    console.log('not getting the uid for the table')
-  }
+    console.log('we`re in')
+    addDoc(exerciseCol, {
+      caloriesBurned: exCalories,
+      exerciseType: exType,
+      datetime: new Date(),
+      uid: auth.currentUser.uid
+    })
+    .then(() =>{
+      clearFoodPopup();
+      
+      let popup = document.querySelector('.popup_active');
+      let blur = document.querySelector('.dash');
+
+      popup.classList.remove('popup_active');
+      blur.classList.remove('blur_active');   
+    })
+})}
+
+//Adding Biometric
+
+async function getMostRecentDocument(collectionRef) {
+  const q = query(collectionRef, 
+    orderBy('timestamp', 'desc'), 
+    limit(1)
+  );
+  const snapshot = await getDocs(q);
+
+  return snapshot.docs[0].data();
+}
+
+const biometricForm = document.querySelector('.biometric_submit_button')
+if(biometricForm) {
+  console.log('its here')
+  biometricForm.addEventListener('click', async (e) =>{
+    e.preventDefault();
+    e.stopPropagation();
+
+    let bioValue = document.querySelector('.biometric_value').value;
+    let exType = document.querySelector('.biometric_select').value;
+    let syncBio = getMostRecentDocument(bioRef)
+    console.log(syncBio)
+    let height = bioValue;
+    let weight = bioValue;
+    if(exType == "height"){
+      weight = syncBio.weight;
+    }
+    if(exType == "weight"){
+      weight = syncBio.height;
+    }
+    //START HERE -------------------- I AM TRYING TO DEFINE LIMIT BECAUSE IT DOESNT UNDERSTAND FOR SOME REASON
+    // MAYBE JUST MAKE AN ARRAY OF THEM ALL AND ONLY USE arr[0]
+    console.log('we`re in')
+    addDoc(bioRef, {
+      caloriesBurned: exCalories,
+      exerciseType: exType,
+      datetime: new Date(),
+      uid: auth.currentUser.uid
+    })
+    .then(() =>{
+      clearFoodPopup();
+      
+      let popup = document.querySelector('.popup_active');
+      let blur = document.querySelector('.dash');
+
+      popup.classList.remove('popup_active');
+      blur.classList.remove('blur_active');   
+    })
+})}
+
+
+
+//Snaphots
+onSnapshot(entryCol, async() => {
+  const user = getAuth().currentUser;
+
+  await updateEntryTable(user.uid);
+  updateMacroTotals();
+  fetchAndUpdateProgressBars();
+
+});
+
+onSnapshot(exerciseCol, async() => {
+  const user = getAuth().currentUser;
+
+  await updateEntryTable(user.uid);
+  updateMacroTotals();
+  fetchAndUpdateProgressBars();
+
 });
 
 async function updateEntryTable(uid) {
   try {
-    console.log('test')
-      let FoodResults = [];
-      const currentDate = new Date();
-      const startDate = new Date(currentDate);
-      startDate.setHours(0, 0, 0, 0);
-      const endDate = new Date(currentDate);
-      endDate.setHours(23, 59, 59, 999);
-      const entryQ = query(entryCol,
+    //Date
+    const currentDate = new Date();
+    const startDate = new Date(currentDate);
+    startDate.setHours(0, 0, 0, 0);
+    const endDate = new Date(currentDate);
+    endDate.setHours(23, 59, 59, 999);
+
+    //Food entries
+    let FoodResults = [];
+    const entryQ = query(entryCol,
+      where('datetime', '>=', startDate),
+      where('datetime', '<', endDate),
+      where('uid', '==', uid),
+      orderBy('datetime', 'desc')
+    );
+    const snapshot = await getDocs(entryQ);
+    snapshot.docs.forEach((doc) => {
+        FoodResults.push({ ...doc.data(), id: doc.id });
+    });
+
+    //Exercise entries
+      let exerciseResults = [];
+      const exercQ = query(exerciseCol,
         where('datetime', '>=', startDate),
         where('datetime', '<', endDate),
         where('uid', '==', uid),
         orderBy('datetime', 'desc')
       );
-      const snapshot = await getDocs(entryQ);
-      snapshot.docs.forEach((doc) => {
-          FoodResults.push({ ...doc.data(), id: doc.id });
+      const snapshotEx = await getDocs(exercQ);
+      snapshotEx.docs.forEach((doc) => {
+          exerciseResults.push({ ...doc.data(), id: doc.id });
       });
+
+      console.log(exerciseResults)
 
       //ENTRY TABLE HTML
       let tableHTML = ''
-      console.log("before generate function")
       tableHTML += await generateEntryTableHTML(FoodResults);
-      console.log('before table insert')
+      tableHTML += await generateExerciseTableHTML(exerciseResults);
+      
+      tableHTML += `
+        </tbody>
+        </table>
+        `;
+
+
       document.querySelector('.food_list_body').innerHTML = tableHTML;
-      console.log('end of first try')
 
   } catch (err) {
       console.error('Error updating entry table:', err);
@@ -311,19 +412,19 @@ async function updateEntryTable(uid) {
 
 async function updateMacroTotals() {
 
-  console.log('before try statement')
   try {
     //CALCULATES Total Calories
     //FILLER STUFF
-    let calorieTotal = document.querySelector('.calorie_total')
-    let protienotal = document.querySelector('.protein_total')
-    let carbTotal = document.querySelector('.carb_total')
-    let fatsTotal = document.querySelector('.fats_total')
+    let calorieTotal = document.querySelector('.calorie_value')
+    let protienotal = document.querySelector('.protein_value')
+    let carbTotal = document.querySelector('.carb_value')
+    let fatsTotal = document.querySelector('.fats_value')
     let calorieTotalHTML = ""
     calorieTotalHTML += `OBAMNA 2 THE RE-BOMNAING`
     calorieTotal.innerHTML = calorieTotalHTML
     
     let FoodEntryRow = 0;
+    let ExerciseRow = 0;
     let calorieSum = 0;
     let proteinSum  = 0;
     let carbSum = 0;
@@ -331,11 +432,8 @@ async function updateMacroTotals() {
     let entryRow
 
     while(FoodEntryRow < 999){
-      console.log('were in boys')
       entryRow = document.getElementById(`food_entry ${FoodEntryRow}`)
       if(!entryRow){
-        console.log(entryRow)
-        console.log('i am breaking on ' + FoodEntryRow)
         break
       }
       
@@ -344,6 +442,15 @@ async function updateMacroTotals() {
       carbSum += parseFloat(entryRow.dataset.carbs)
       fatsSum += parseFloat(entryRow.dataset.fats)
       FoodEntryRow++
+    }
+    console.log('pre exercise')
+    while(ExerciseRow < 999){
+      entryRow = document.getElementById(`exercise_entry ${ExerciseRow}`)
+      if(!entryRow){
+        break
+      }
+      calorieSum -= parseFloat(entryRow.dataset.calories)
+      ExerciseRow++
     }
     
     calorieTotal.innerHTML = calorieSum.toFixed(2) + " kCal"
@@ -358,13 +465,90 @@ async function updateMacroTotals() {
   }
 }
 
+async function calculateMacroLimits(uid, calorieLimit, proteinLimit, carbLimit, fatsLimit) {
+  const biometricsQ = query(bioRef, where('uid', '==', uid), orderBy('datetime', 'desc'));
+  let biometricsResults = [];
+  const snapshot = await getDocs(biometricsQ);
+  snapshot.docs.forEach((doc) => {
+    biometricsResults.push({ ...doc.data(), id: doc.id });
+  });
+
+  const currentWeight = biometricsResults[0].weight;
+  const currentHeight = biometricsResults[0].height;
+  const calorieLcalc = 88.362 + (13.397 * currentWeight) + (4.799 * currentHeight) - (5.677 * 25);
+  const protienLcalc = Math.floor(currentWeight * 1.8)
+  const fatsLcalc = Math.floor((calorieLcalc * 0.3) / 9)
+  const carbLcalc = Math.floor((calorieLcalc - (protienLcalc * 4) - (fatsLcalc * 9))/4)
+
+  const calculatedLimits = {
+    calorieLimit: calorieLcalc,
+    proteinLimit: protienLcalc,
+    fatsLimit: fatsLcalc,
+    carbLimit: carbLcalc,
+  };
+
+  return calculatedLimits;
+}
+
+async function progressBarPrinting(proteinValueE, proteinLimitE, progressBar) {
+  const value = parseFloat(proteinValueE.textContent);
+  const limit = parseFloat(proteinLimitE.textContent);
+
+  const width = ((value/ limit) * 100) || 0
+  progressBar.style.setProperty('--width', width);
+  progressBar.style.backgroundColor = width > 100 ? 'red' : '#c7c7c7';
+}
+
+// Function to fetch and update progress bars (replace with your actual logic)
+async function fetchAndUpdateProgressBars() {
+  const user = getAuth().currentUser;
+  let calorieLimitValue;
+  let proteinLimitValue;
+  let carbLimitValue;
+  let fatLimitValue;
+
+  const calculatedLimits = await calculateMacroLimits(user.uid, calorieLimitValue, proteinLimitValue, carbLimitValue, fatLimitValue);
+
+  calorieLimitValue = calculatedLimits.calorieLimit;
+  proteinLimitValue = calculatedLimits.proteinLimit;
+  carbLimitValue = calculatedLimits.carbLimit;
+  fatLimitValue = calculatedLimits.fatsLimit;
+
+  const calorieValue = document.querySelector('.calorie_value');
+  const calorieLimit = document.querySelector('.calorie_limit');
+  const calorieProgress = document.querySelector('.calorie_bar');
+  calorieLimit.textContent = calorieLimitValue;
+  
+  const proteinValue = document.querySelector('.protein_value');
+  const proteinLimit = document.querySelector('.protein_limit');
+  const proteinProgress = document.querySelector('.protein_bar');
+  proteinLimit.textContent = proteinLimitValue;
+
+  const carbValue = document.querySelector('.carb_value');
+  const carbLimit = document.querySelector('.carb_limit');
+  const carbProgress = document.querySelector('.carb_bar');
+  carbLimit.textContent = carbLimitValue;
+
+  const fatValue = document.querySelector('.fats_value');
+  const fatLimit = document.querySelector('.fats_limit');
+  const fatProgress = document.querySelector('.fats_bar');
+  fatLimit.textContent = fatLimitValue;
+
+  await progressBarPrinting(calorieValue, calorieLimit, calorieProgress);
+  await progressBarPrinting(proteinValue, proteinLimit, proteinProgress);
+  await progressBarPrinting(carbValue, carbLimit, carbProgress);
+  await progressBarPrinting(fatValue, fatLimit, fatProgress);
+}
+
+fetchAndUpdateProgressBars(); // Call this when data is ready
+
 async function generateEntryTableHTML(FoodResults) {
   let tableHTMLinsert = '';
 
   tableHTMLinsert = `
     <table class="food_list_table" >
         <thead>
-            <tr class="food_entry">
+            <tr class="table_entry">
                 <th class="food_filler"></th>
                 <th class="food_icon">Type</th>
                 <th class="food_name">Name</th>
@@ -390,7 +574,7 @@ async function generateEntryTableHTML(FoodResults) {
               let fats = (foodInfo.fats * (item.servings / foodInfo.serving_size)).toFixed(2);
 
               tableHTMLinsert += `
-                  <tr class="food_entry" id="food_entry ${index}" data-id="${item.id}" data-protein="${protein}" data-carbs="${carbs}" data-fats="${fats}" data-calories="${calories}">
+                  <tr class="table_entry" id="food_entry ${index}" data-id="${item.id}" data-protein="${protein}" data-carbs="${carbs}" data-fats="${fats}" data-calories="${calories}">
                       <td class="food_filler"></td>
                       <td class="food_icon">Food</td>
                       <td class="food_name">${foodInfo.name}</td>
@@ -404,6 +588,36 @@ async function generateEntryTableHTML(FoodResults) {
 
       } catch (error) {
           console.error('Error getting food info:', error);
+      }
+  }
+
+  return tableHTMLinsert;
+}
+async function generateExerciseTableHTML(exerciseResults) {
+  let tableHTMLinsert = '';
+
+  // Iterate over exercise array
+  for (const [index, item] of exerciseResults.entries()) {
+      try {
+        let calories = item.caloriesBurned;
+        let protein = 0
+        let carbs = 0
+        let fats = 0
+
+        tableHTMLinsert += `
+            <tr class="table_entry" id="exercise_entry ${index}" data-id="${item.id}" data-protein="${protein}" data-carbs="${carbs}" data-fats="${fats}" data-calories="${calories}">
+                <td class="exercise_filler"></td>
+                <td class="exercise_icon">Exercise</td>
+                <td class="exercise_name">${item.exerciseType}</td>
+                <td class="exercise_quantity"></td>
+                <td class="exercise_unit"></td>
+                <td class="exercise_calories">${calories}</td>
+                <td class="exercise_kCal">kCal</td>
+            </tr>
+        `;
+
+      } catch (error) {
+          console.error('Error getting exercise info:', error);
       }
   }
 

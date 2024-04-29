@@ -75,7 +75,6 @@ const unsubCol = onSnapshot(q, (snapshot) => {
   snapshot.docs.forEach((doc) => {
     biometrics.push({ ...doc.data(), id: doc.id })
   } )
-  console.log(biometrics)
 })
 
 
@@ -99,7 +98,6 @@ if(addBiometric){
         uid: user.uid
       })
       .then(() =>{
-        console.log(currentTime)
         addBiometric.reset()  
     })}
     
@@ -142,14 +140,12 @@ const signupForm = document.querySelector('.signup')
 if(signupForm){
 signupForm.addEventListener('submit', (e) => {
   e.preventDefault()
-  //console.log('OBAMNA')
 
   const email = signupForm.email.value
   const password = signupForm.password.value
 
   createUserWithEmailAndPassword(auth, email, password)
     .then((cred) => {
-      console.log('User Created:', cred.user)
       signupForm.reset();
     })
     .catch((err) => {
@@ -168,7 +164,6 @@ loginForm.addEventListener('submit', (e) => {
 
   signInWithEmailAndPassword(auth, email, password)
     .then((cred) => {
-      //console.log('the user is logged in: ', cred.user)
       window.location.href = 'pages/TEMP_dashboard.html'
     })
     .catch((err) => {
@@ -182,7 +177,6 @@ if(logoutForm){
 logoutForm.addEventListener('click', () => {
   signOut(auth)
   .then(() => {
-    //console.log('the user is signed out')
   })
   .catch((err) => {
     console.log(err.message)
