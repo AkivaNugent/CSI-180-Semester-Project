@@ -7,18 +7,6 @@
     <link rel="stylesheet" href="../styles/dashboard.CSS">
 </head>
 <body>
-    <!--
-    <form class="foodform">
-        <input type="text" name="name" placeholder="name" required>
-        <input type="text" name="fid" placeholder="fid">
-        <input type="text" name="serving_size" placeholder="serving size" required>
-        <input type="text" name="calories" placeholder="calories" required>
-        <input type="text" name="protien" placeholder="protien" required>
-        <input type="text" name="carbs" placeholder="carbs" required>
-        <input type="text" name="fats" placeholder="fats" required>
-        <button>Submit Food</button>
-    </form>
-    -->
     <!-- POPUPS -->
     <!-- FOOD POPUP -->
     <div class="food_popup popup">
@@ -43,6 +31,23 @@
             </form>
         </div>  
     </div>
+    <div class="food_entry_popup popup">
+        <div class="food_entry_popup_header">FOOD</div>
+        <div class="food_entry_popup_name"></div>
+        <div class="food_entry_popup_info">
+            <div class="food_entry_popup_calories"></div>
+            <div class="food_entry_popup_protein"></div>
+            <div class="food_entry_popup_carbs"></div>
+            <div class="food_entry_popup_fats"></div>
+            <input type="number" class="food_entry_popup_servings" placeholder=""></input>
+            <div class="food_entry_popup_filler">g</div>
+            <div class="food_entry_popup_passing_data"></div>
+        </div>
+        <div class="food_entry_popup_options">
+            <button class="food_entry_popup_update">UPDATE</button>
+            <button class="food_entry_popup_delete">DELETE</button>
+        </div>
+    </div>
     <!-- EXERCISE POPUP -->
     <div class="exercise_popup popup">
         <h1> ADD AN EXERCISE </h1>
@@ -63,6 +68,19 @@
             </form>
         </div> 
     </div>
+    <div class="exercise_entry_popup popup">
+        <div class="exercise_entry_popup_header">EXERCISE</div>
+        <div class="exercise_entry_popup_info">
+            <div class="exercise_entry_popup_name"></div>
+            <input type="number" class="exercise_entry_popup_calories" placeholder=""></input>
+            <div class="exercise_entry_popup_filler">kCal</div>
+            <div class="exercise_entry_popup_passing_data"></div>
+        </div>
+        <div class="exercise_entry_popup_options">
+            <button class="exercise_entry_popup_update">UPDATE</button>
+            <button class="exercise_entry_popup_delete">DELETE</button>
+        </div>
+    </div>
     <!-- BIOMETRIC POPUP -->
     <div class="biometric_popup popup">
         <h1> ADD A BIOMETRIC </h1>
@@ -79,9 +97,47 @@
             </form>
         </div> 
     </div>
+    <div class="height_entry_popup popup">
+            <div class="height_entry_popup_header">HEIGHT</div>
+            <div class="height_entry_popup_info">
+                <input type="number" class="height_entry_popup_value" placeholder=""></input>
+                <div class="height_entry_popup_filler">cm</div>
+                <div class="height_entry_popup_passing_data"></div>
+            </div>
+            <div class="height_entry_popup_options">
+                <button class="height_entry_popup_update">UPDATE</button>
+                <button class="height_entry_popup_delete">DELETE</button>
+            </div>
+    </div>
+    <div class="weight_entry_popup popup">
+        <div class="weight_entry_popup_header">WEIGHT</div>
+        <div class="weight_entry_popup_info">
+            <input type="number" class="weight_entry_popup_value" placeholder=""></input>
+            <div class="weight_entry_popup_filler">kg</div>
+            <div class="weight_entry_popup_passing_data"></div>
+        </div>
+        <div class="weight_entry_popup_options">
+            <button class="weight_entry_popup_update">UPDATE</button>
+            <button class="weight_entry_popup_delete">DELETE</button>
+        </div>
+</div>
     <!-- NOTES POPUP -->
-    <div class="notes_popup popup"><h1> ADD A NOTE </h1></div>
-
+    <div class="notes_popup popup">
+        <h1> ADD A NOTE </h1>
+        <textarea class="note_input" placeholder="Write a note..."></textarea>
+        <button class="note_submit">submit</button>
+    </div>
+    <div class="note_entry_popup popup">
+        <div class="note_entry_popup_header">WEIGHT</div>
+        <div class="note_entry_popup_info">
+            <textarea class="note_entry_popup_value" placeholder="write a note..."></textarea>
+            <div class="note_entry_popup_passing_data"></div>
+        </div>
+        <div class="note_entry_popup_options">
+            <button class="note_entry_popup_update">UPDATE</button>
+            <button class="note_entry_popup_delete">DELETE</button>
+        </div>
+</div>
 
     <!-- DASHBOARD -->
     <div class="dash">
@@ -90,12 +146,13 @@
         <div class="sidebar_small">
             <p class="white">/ / /</p>
         </div>
+        <!-- DASH PAGE -->
         <div class="dash_page_structure">
             <!-- HEADER --> 
             <header class="header_bar">
                     <h1 class="account_btn"></h1>
             </header>
-            <!-- Main Content -->
+            <!-- MAIN CONTENT -->
             <div class="main_content">
                 <!-- DIARY AND PERCENTAGES -->
                 <!-- DIARY -->
@@ -151,75 +208,40 @@
                 </div>
                 <!-- CALENDAR -->
                 <div class="calendar_section">
-                    <div class="calendar_remote">
-                        <div class="month_back"><<</div>
-                        <div class="day_back"><</div>
-                        <div class="date">Mar 16</div>
-                        <div class="day_forward">></div>
-                        <div class="month_forward">>></div>
-                    </div>
-                    <div class="calendar_grid">
-                        <div class="month">March</div>
-                        <table class="days">
-                            <tr>
-                                <th>S</th>
-                                <th>M</th>
-                                <th>T</th>
-                                <th>W</th>
-                                <th>Th</th>
-                                <th>F</th>
-                                <th>S</th>
-                            </tr>
-                            <tr>
-                                <th class="day">1</th>
-                                <th class="day">2</th>
-                                <th class="day">3</th>
-                                <th class="day">4</th>
-                                <th class="day">5</th>
-                                <th class="day">6</th>
-                                <th class="day">7</th>
-                            </tr>
-                            <tr>
-                                <th class="day">8</th>
-                                <th class="day">9</th>
-                                <th class="day">10</th>
-                                <th class="day">11</th>
-                                <th class="day">12</th>
-                                <th class="day">13</th>
-                                <th class="day">14</th>
-                            </tr>
-                            <tr>
-                                <th class="day">15</th>
-                                <th class="day">16</th>
-                                <th class="day">17</th>
-                                <th class="day">18</th>
-                                <th class="day">19</th>
-                                <th class="day">20</th>
-                                <th class="day">21</th>
-                                
-                            </tr>
-                            <tr>
-                                <th class="day">22</th>
-                                <th class="day">23</th>
-                                <th class="day">24</th>
-                                <th class="day">25</th>
-                                <th class="day">26</th>
-                                <th class="day">27</th>
-                                <th class="day">28</th>
-                            </tr>
-                            <tr>
-                                <th class="day">29</th>
-                                <th class="day">30</th>
-                                <th class="day">31</th>
-                            </tr>
-                        </div>
-                        </div>
-                    </div>
-                    </div>
+                    <div class="navigation-bar">
+                        <button class="prev-month-btn">Previous Month</button>
+                        <h2 class="current-month-year"></h2>
+                        <button class="next-month-btn">Next Month</button>
+                      </div>
+                      
+                      <table class="calendar-table">
+                        <thead>
+                          <tr>
+                            <th class="calendar-header">Sun</th>
+                            <th class="calendar-header">Mon</th>
+                            <th class="calendar-header">Tue</th>
+                            <th class="calendar-header">Wed</th>
+                            <th class="calendar-header">Thu</th>
+                            <th class="calendar-header">Fri</th>
+                            <th class="calendar-header">Sat</th>
+                          </tr>
+                        </thead>
+                        <tbody></tbody>
+                      </table>
+                    <!--here -->
+                <div class="current_height">
+                    <h1>Current Height:  </h1>
+                    <h1 class="current_height_value"></h1>
+                </div>
+                <div class="current_weight">
+                    <h1>Current Weight:</h1>
+                    <h1 class="current_weight_value"></h1>
+                </div>
                 </div>
             </div>
         </div>
-    </div>
+    </div> 
+
   <script defer src="../bundle.js"></script>
 </body>
 </html>

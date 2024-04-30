@@ -62,7 +62,9 @@ display: inline-block;
     width: 98%;
     height: 50%;
     min-height: 500px;
+    max-height: 500px;
     margin: 1%;
+    overflow-y: auto;
 }
 .results_table{
     width: 100%;
@@ -137,7 +139,7 @@ border-radius: 10px;
 border-top: solid;
 border-right: solid;
 min-width: 100px;
-background-color: rgb(45, 45, 94);
+background-color: rgb(0, 153, 25);;
 }
 .sidebar_big{
 width: 100px;
@@ -332,3 +334,119 @@ width: 100px;
         max-width: calc(100%);
         background-color: rgb(0, 153, 25);
     }
+    .current_height, .current_weight {
+        display: flex;
+        flex-direction: row;
+    }
+    .current_height_value, .current_weight_value {
+        color: rgb(0, 153, 25);
+    }
+    .notes_popup{
+        display: flex;
+        flex-direction: column;
+        height: 10%;
+    }
+    .note_input{
+        height: 80%;
+        margin: 30px;
+    }
+    .table_image {
+        width: 20px;
+        height: 20px;
+      }
+      .food_entry_popup_info,
+      .exercise_entry_popup_info,
+      .height_entry_popup_info,
+      .weight_entry_popup_info,
+      .note_entry_popup_info{
+        display: flex;
+        flex-direction: row;
+      }
+      .food_entry_popup_header,
+      .exercise_entry_popup_header,
+      .height_entry_popup_header,
+      .weight_entry_popup_header,
+      .note_entry_popup_header{
+        font-size: 75px;
+      }
+      .food_entry_popup_name,
+      .exercise_entry_popup_name{
+        font-size: 50px;
+        color: rgb(0, 153, 25);
+      }
+      .food_entry_popup_calories, 
+      .food_entry_popup_protein, 
+      .food_entry_popup_carbs, 
+      .food_entry_popup_fats,
+      .food_entry_popup_servings,
+      .exercise_entry_popup_calories, 
+      .exercise_entry_popup_protein, 
+      .exercise_entry_popup_carbs, 
+      .exercise_entry_popup_fats,
+      .exercise_entry_popup_servings,
+      .height_entry_popup_value  {
+        font-size: 40px;
+        margin: 40px;
+      }
+      .food_entry_popup_servings,
+      .exercise_entry_popup_servings{
+        width: 100px;
+        margin-right: 0px;
+      }
+      .food_entry_popup_filler,
+      .exercise_entry_popup_filler,
+      .height_entry_popup_filler,
+      .weight_entry_popup_filler,
+      .note_entry_popup_filler{
+        margin-top: 40px;
+        font-size: 40px;
+      }
+      .food_entry_popup_options,
+      .exercise_entry_popup_options,
+      .height_entry_popup_options,
+      .weight_entry_popup_options,
+      .note_entry_popup_options{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+      }
+      .food_entry_popup_update,
+      .food_entry_popup_delete, 
+      .exercise_entry_popup_update,
+      .exercise_entry_popup_delete,
+      .height_entry_popup_update,
+      .height_entry_popup_delete,
+      .weight_entry_popup_update,
+      .weight_entry_popup_delete,
+      .note_entry_popup_update,
+      .note_entry_popup_delete{
+        font-size: 50px;
+        height: 100px;
+      }
+      .note_entry_popup_value {
+        width: 100%;
+        height: 500px;
+      }
+
+      /*CALENDAR SECTION*/
+
+      .calendar-table {
+        border-collapse: collapse;
+        width: 100%;
+      }
+      .calendar-header, .calendar-cell {
+        border: 1px solid black;
+        padding: 8px;
+        text-align: center;
+      }
+      .calendar-header {
+        background-color: rgb(0, 153, 25);
+      }
+      .calendar-cell:hover {
+        cursor: pointer;
+      }
+      .navigation-bar {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 10px;
+      }

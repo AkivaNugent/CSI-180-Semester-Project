@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Simple Calendar</title>
+<style>
+  .calendar-table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+  .calendar-header, .calendar-cell {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+  }
+  .calendar-header {
+    background-color: #f2f2f2;
+  }
+  .calendar-cell:hover {
+    background-color: #f0f0f0;
+    cursor: pointer;
+  }
+  .navigation-bar {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
+</style>
+</head>
+<body>
+
+<div class="navigation-bar">
+  <button class="prev-month-btn">Previous Month</button>
+  <h2 class="current-month-year"></h2>
+  <button class="next-month-btn">Next Month</button>
+</div>
+
+<table class="calendar-table">
+  <thead>
+    <tr>
+      <th class="calendar-header">Sun</th>
+      <th class="calendar-header">Mon</th>
+      <th class="calendar-header">Tue</th>
+      <th class="calendar-header">Wed</th>
+      <th class="calendar-header">Thu</th>
+      <th class="calendar-header">Fri</th>
+      <th class="calendar-header">Sat</th>
+    </tr>
+  </thead>
+  <tbody></tbody>
+</table>
+
+<script>
+  function generateCalendar(year, month) {
+    const firstDayOfMonth = new Date(year, month, 1).getDay(); // Day of the week of the first day of the month (0 - 6)
+    const lastDayOfMonth = new Date(year, month + 1, 0).getDate(); // Last day of the month
+
+    const tbody = document.querySelector('.calendar-table tbody');
+    tbody.innerHTML = '';
+
+    let date = 1;
+    for (let i = 0; i < 6; i++) {
+      const row = document.createElement('tr');
+      for (let j = 0; j < 7; j++) {
+        const cell = document.createElement('td');
+        if ((i === 0 && j < firstDayOfMonth) || date > lastDayOfMonth) {
+          // Add empty cells before the first day of the month and after the last day of the month
+          cell.textContent = '';
+        } else {
+          cell.textContent = date;
+          const dateString = new Date(year, month, date).toISOString();
+          cell.addEventListener('click', function() {
+            console.log('JavaScript readable datetime:', dateString);
+            console.log('Human readable date:', new Date(year, month, date).toLocaleDateString());
+          });
+          date++;
+        }
+        cell.classList.add('calendar-cell');
+        row.appendChild(cell);
+      }
+      tbody.appendChild(row);
+      if (date > lastDayOfMonth) {
+        break; // Break loop if all days of the month have been added
+      }
+    }
+    document.querySelector('.current-month-year').textContent = `${new Date(year, month).toLocaleString('default', { month: 'long' })} ${year}`;
+  }
+
+  const today = new Date();
+  let currentYear = today.getFullYear();
+  let currentMonth = today.getMonth();
+  generateCalendar(currentYear, currentMonth);
+
+  document.querySelector('.prev-month-btn').addEventListener('click', function() {
+    currentMonth--;
+    if (currentMonth < 0) {
+      currentMonth = 11;
+      currentYear--;
+    }
+    generateCalendar(currentYear, currentMonth);
+  });
+
+  document.querySelector('.next-month-btn').addEventListener('click', function() {
+    currentMonth++;
+    if (currentMonth > 11) {
+      currentMonth = 0;
+      currentYear++;
+    }
+    generateCalendar(currentYear, currentMonth);
+  });
+</script>
+
+</body>
+</html>
